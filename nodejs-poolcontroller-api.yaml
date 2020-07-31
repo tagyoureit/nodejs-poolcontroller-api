@@ -5,14 +5,18 @@ info:
     API's to access, manage and control your pool equipment.  You can find the main project at [nodejs-poolController](https://github.com/tagyoureit/nodejs-poolController/).
     The data structures are defined in the main app's [wiki](https://github.com/tagyoureit/nodejs-poolController/wiki/Version-6-Data-Structures).
 
-    These api's are `live` in the sense that you can execute any of them against your local nodejs-poolController app.  
+    These api's are `live` in the sense that you can execute any of them against your local nodejs-poolController app(*).  
     1. Select one of the default servers or enter your server:port into the Server Variables area
     1. Open up any endpoint
     1. Click on "Try it out"
     1. If there are Parameters or JSON variables that need to be included in the request, fill them out
     1. Click execute and you can see the live results from your server "To set body settings, send an object with the values you want to change from /config/options/bodies."
 
-    You can also download a [Postman collection](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.json) you can download and import into your local app.
+    * Note: You may not be able to access servers other than localhost when loading this from Github.io.  If that's the case, try one of the folloing:
+
+    1. You can also download a [Postman collection](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.json) you can download and import into your local app.
+    1. Download the [YAML](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.yaml) and paste it in http://editor.swagger.io
+    1. Download a code editor like VSCode and use a [Swagger Preview Extension](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)
 
   version: 6.0.0
 
@@ -1926,8 +1930,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/configChemController"
-              example:
-                $ref: "#/components/examples/stateChemController"
+              examples:
+                stateChemController:
+                  $ref: "#/components/examples/stateChemController"
   /state/chemControllers/:
     get:
       summary: Return an individual chem controller object
@@ -1966,8 +1971,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateChlorinator"
-              example:
-                $ref: "#/components/examples/stateChlorinator"
+              examples:
+                Chlorinator State:
+                  $ref: "#/components/examples/stateChlorinator"
   /state/chlorinator/:
     put:
       summary: Set attributes for a given chlorinator
@@ -1990,8 +1996,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateChlorinator"
-              example:
-                $ref: "#/components/examples/stateChlorinator"
+              examples:
+                Chlorinator State:
+                  $ref: "#/components/examples/stateChlorinator"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2022,7 +2029,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/stateChlorinator"
               example:
-                $ref: "#/components/examples/stateChlorinator"
+                Chlorinator State:
+                  $ref: "#/components/examples/stateChlorinator"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2057,8 +2065,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateChlorinator"
-              example:
-                $ref: "#/components/examples/stateChlorinator"
+              examples:
+                Chlorinator State:
+                  $ref: "#/components/examples/stateChlorinator"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2094,8 +2103,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateChlorinator"
-              example:
-                $ref: "#/components/examples/stateChlorinator"
+              examples: 
+                Chlorinator State:
+                  $ref: "#/components/examples/stateChlorinator"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2130,8 +2140,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateChlorinator"
-              example:
-                $ref: "#/components/examples/stateChlorinator"
+              examples:
+                Chlorinator State:
+                  $ref: "#/components/examples/stateChlorinator"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2166,8 +2177,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateChlorinator"
-              example:
-                $ref: "#/components/examples/stateChlorinator"
+              examples:
+                Chlorinator State:
+                  $ref: "#/components/examples/stateChlorinator"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2225,8 +2237,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/statePump"
-              example:
-                $ref: "#/components/examples/statePump"
+              examples:
+                Pump State:
+                  $ref: "#/components/examples/statePump"
   /state/circuit/setState/:
     put:
       summary: Set options for a circuit in poolState.json
@@ -2254,8 +2267,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateCircuit"
-              example:
-                $ref: "#/components/examples/stateCircuit"
+              examples: 
+                Circuit State:
+                  $ref: "#/components/examples/stateCircuit"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2287,8 +2301,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateCircuit"
-              example:
-                $ref: "#/components/examples/stateCircuit"
+              examples:
+                Circuit State:
+                  $ref: "#/components/examples/stateCircuit"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2322,8 +2337,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateFeature"
-              example:
-                $ref: "#/components/examples/stateFeature"
+              examples:
+                Feature State:
+                  $ref: "#/components/examples/stateFeature"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2355,8 +2371,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateCircuit"
-              example:
-                $ref: "#/components/examples/stateCircuit"
+              examples:
+                Circuit State:
+                  $ref: "#/components/examples/stateCircuit"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2390,8 +2407,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateCircuitGroup"
-              example:
-                $ref: "#/components/examples/stateCircuitGroup"
+              examples:
+                Circuit Group State:
+                  $ref: "#/components/examples/stateCircuitGroup"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2425,8 +2443,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateLightGroup"
-              example:
-                $ref: "#/components/examples/stateLightGroup"
+              examples:
+                Light Group State:
+                  $ref: "#/components/examples/stateLightGroup"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2460,8 +2479,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateLightGroup"
-              example:
-                $ref: "#/components/examples/stateLightGroup"
+              examples:
+                Light Group State:
+                  $ref: "#/components/examples/stateLightGroup"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2634,8 +2654,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateCircuitGroup"
-              example:
-                $ref: "#/components/examples/stateCircuitGroup"
+              examples:
+                Circuit Group State:
+                  $ref: "#/components/examples/stateCircuitGroup"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2672,8 +2693,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateCircuit"
-              example:
-                $ref: "#/components/examples/stateCircuit"
+              examples:
+                Circuit State:
+                  $ref: "#/components/examples/stateCircuit"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2726,8 +2748,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateTemps"
-              example:
-                $ref: "#/components/examples/stateTemps"
+              examples:
+                Temp State:
+                  $ref: "#/components/examples/stateTemps"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2770,8 +2793,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateCircuit"
-              example:
-                $ref: "#/components/examples/stateCircuit"
+              examples:
+                Circuit State:
+                  $ref: "#/components/examples/stateCircuit"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
@@ -2820,8 +2844,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/stateBodyTemp"
-              example:
-                $ref: "#/components/examples/stateBodyTemp"
+              examples:
+                Body Temp State:
+                  $ref: "#/components/examples/stateBodyTemp"
         default:
           description: 400 or 500 return codes (See Schema)
           content:
