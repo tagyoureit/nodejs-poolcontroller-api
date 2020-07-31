@@ -20,6 +20,13 @@ info:
     1. Download the [YAML](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.yaml) and paste it in http://editor.swagger.io
     1. Download a code editor like VSCode and use a [Swagger Preview Extension](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)
 
+    Want to help?
+    1. Clone the [nodejs-poolcontroller-api repository](https://github.com/tagyoureit/nodejs-poolcontroller-api)
+    1. Create a new branch
+    1. Make changes
+    1. Open a Pull Request
+    (Or, just open up an issue and it will get fixed)
+
   version: 6.0.0
 
 servers:
@@ -28,13 +35,13 @@ servers:
     variables:
       protocol:
         enum:
-          - http
           - https
-        default: http
+          - http
+        default: https
       server:
         default: "server"
       port:
-        default: "4200"
+        default: "4201"
   - url: "{protocol}://localhost:4200"
     description: Local Server
     variables:
