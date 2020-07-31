@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-poolcontroller-api",
+  "version": "0.1.0",
+  "description": "API Specs for nodejs-poolcontroller.",
+  "main": "index.js",
+  "scripts": {
+    "test": "swagger-cli validate _build/openapi3.yaml",
+    "build": "swagger-cli bundle nodejs-poolcontroller-api.yaml --outfile _build/nodejs-poolcontroller-api.yaml --type yaml",
+    "postman": "openapi2postmanv2 -s nodejs-poolcontroller-api.yaml -o _build/postman.json -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tagyoureit/nodejs-poolcontroller-api.git"
+  },
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/tagyoureit/nodejs-poolcontroller-api/issues"
+  },
+  "homepage": "https://github.com/tagyoureit/nodejs-poolcontroller-api#readme",
+  "dependencies": {
+    "openapi-to-postmanv2": "^0.1.0"
+  }
+}

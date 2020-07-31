@@ -1,0 +1,4712 @@
+openapi: 3.0.2
+info:
+  title: nodejs-poolController API
+  description: |-
+    API's to access, manage and control your pool equipment.  You can find the main project at [nodejs-poolController](https://github.com/tagyoureit/nodejs-poolController/).
+    The data structures are defined in the main app's [wiki](https://github.com/tagyoureit/nodejs-poolController/wiki/Version-6-Data-Structures).
+
+    These api's are `live` in the sense that you can execute any of them against your local nodejs-poolController app.  However, if you are viewing this API documentation via a github.io page you likely won't be able to access your local install.
+
+    To execute these locally, you can do one of the following: 
+
+  version: 6.0.0
+
+servers:
+  - url: "{protocol}://{server:port}/"
+    description: Type in your server address
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      server:port:
+        default: "server:4200"
+  - url: "{protocol}://localhost:4200"
+    description: Local Server
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+  - url: "{protocol}://raspberrypi.local:4200"
+    description: Default RasPi server name
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+tags:
+  - name: state
+    description: Any endpoints that relate to the current state of your pool
+  - name: config
+    description: Any endpoints that relate to the configuration of your pool
+  - name: circuits
+    description: API endpoints for operating on all circuits
+  - name: features
+    description: API endpoints for features
+  - name: circuit groups
+    description: API endpoints for circuit groups
+  - name: light groups
+    description: API endpoints for light groups
+  - name: chlorinators
+    description: API endpoints for chlorinators
+  - name: chem controllers
+    description: API endpoints for chemical controllers
+  - name: bodies
+    description: API endpoints for bodies 
+  - name: valves
+    description: API endpoints for valves 
+  - name: pumps
+    description: API endpoints for pumps 
+  - name: schedules
+    description: API endpoints for schedules
+  - name: heaters
+    description: API endpoints for heaters (to set temps, use temps end points)
+  - name: temps
+    description: API endpoints for heaters
+  - name: pool
+    description: API endpoints for pool options in the general section of poolConfig.json
+  - name: custom names
+    description: API endpoints for custom names (*Touch only)
+  - name: virtual controllers
+    description: API endpoints for virtual controllers
+  - name: general
+    description: API endpoints for general settings (owner, location, etc)
+  - name: delays
+    description: API endpoints for cancelling system delays
+  - name: lights
+    description: API endpoints for setting theme and dimmer level for individual circuits (for light groups see 'light groups' end points)
+  - name: date and time
+    description: API endpoints for date and time
+  - name: app
+    description: API endpoints for setting app options (logger, messages, packetCapture) 
+  - name: packets
+    description: API endpoints for retrieving packet definitions
+  - name: logger
+    description: API endpoints for setting app logger options
+  - name: packet capture
+    description: API endpoints for retrieving packet definitions
+  - name: options
+    description: API endpoints for retrieving configuration options 
+paths:
+  /config/circuits/:
+    get:
+      summary: Get an array of all circuit objects with config data
+      description: Array of circuit config objects
+      tags:
+        - config
+        - circuits
+      responses:
+        "200":
+          description: Circuit config array
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configCircuits"
+
+  /config/body/{id}/heatModes/:
+    get:
+      summary: |-
+        Get heat modes for the body specified by the id
+      description: "Get heat modes for the body specified by the id"
+      tags:
+        - config
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id of the body
+      responses:
+        "200":
+          description: Array of heat mode objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/valNameDescArr"
+  /config/circuit/names/:
+    get:
+      summary: |-
+        Get all available names (built-in and custom).  (*Touch only)
+        This endpoint will be going away.  Please use the equipmentNames object 
+        in /config/options/circuits or /config/options/features instead.
+      description: "Get all available names (built-in and custom).  (*Touch only)"
+      deprecated: true
+      tags:
+        - config
+        - circuits
+      responses:
+        "200":
+          description: Array of name objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/valNameDescArr"
+              example:
+                [
+                  { "val": 1, "name": "aerator", "desc": "Aerator" },
+                  { "val": 2, "name": "airblower", "desc": "Air Blower" },
+                  { "val": 3, "name": "aux1", "desc": "AUX 1" },
+                ]
+
+  /config/circuit/references/:
+    get:
+      summary: Get an array of objects that can include circuits, features, groups, virtual circuits.
+      description: |-
+        Get an array of objects that can include circuits, features, groups, virtual circuits.  Any parameter not
+        included will be included (must specify false to exclude values)
+      tags:
+        - config
+        - circuits
+      parameters:
+        - in: query
+          name: circuits
+          required: false
+          schema:
+            type: boolean
+          description: Include/exclude circuitss in the references object
+        - in: query
+          name: features
+          required: false
+          schema:
+            type: boolean
+          description: Include/exclude features in the references object
+        - in: query
+          name: groups
+          required: false
+          schema:
+            type: boolean
+          description: Include/exclude groupss in the references object
+        - in: query
+          name: virtual
+          required: false
+          schema:
+            type: boolean
+          description: Include/exclude virtuals in the references object
+      responses:
+        "200":
+          description: Array of circuits/features/groups/virtual circuit objects.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configCircuits"
+              example:
+                [
+                  {
+                    "id": 11,
+                    "name": "Spillway",
+                    "type": 14,
+                    "equipmentType": "feature",
+                    "nameId": 79,
+                  },
+                  {
+                    "id": 12,
+                    "name": "Waterfall 1",
+                    "type": 0,
+                    "equipmentType": "feature",
+                    "nameId": 87,
+                  },
+                ]
+  /config/options/general/:
+    get:
+      summary: Get all available options needed to configure general options
+      description: "Retrieves: countries, tempUnits, timeZones, clockSources, clockModes, pool, sensors"
+      tags:
+        - config
+        - general
+      responses:
+        "200":
+          description: Object containing all available general options for the pool type
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configOptionsGeneral"
+  /config/options/circuits/:
+    get:
+      summary: Get all available options to set circuits
+      description: "Returns: maxCircuits, invalidIds, equipmentIds, equipmentNames, functions, circuits"
+      tags:
+        - config
+        - options
+        - circuits
+      responses:
+        "200":
+          description: Object containing all available general options for the circuits
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invalidIds:
+                    type: array
+                    items:
+                      type: integer
+                  equipmentIds:
+                    type: object
+                    properties:
+                      start:
+                        type: integer
+                      stop:
+                        type: integer
+                  equipmentNames:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  functions:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  circuits:
+                    $ref: "#/components/schemas/configCircuits"
+                  maxCircuits:
+                    type: integer
+  /config/options/circuitGroups/:
+    get:
+      summary: Get all options needed to set circuit groups
+      description: "Get all options needed to set circuit groups"
+      tags:
+        - config
+        - options
+        - circuit groups
+      responses:
+        "200":
+          description: Object containing all available general options for the circuit groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  equipmentNames:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  circuits:
+                    $ref: "#/components/schemas/configCircuits"
+                  circuitGroups:
+                    $ref: "#/components/schemas/configCircuitGroups"
+                  maxCircuitGroups:
+                    type: integer
+  /config/options/lightGroups/:
+    get:
+      summary: Get all available options to set lightGroups
+      description: "Returns: maxLightGroups, invalidIds, equipmentIds, equipmentNames, functions, features"
+      tags:
+        - config
+        - options
+        - light groups
+      responses:
+        "200":
+          description: Object containing all available general options for the light groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invalidIds:
+                    type: array
+                    items:
+                      type: integer
+                    example: [10, 19]
+                  equipmentIds:
+                    type: object
+                    properties:
+                      start:
+                        type: integer
+                        example: 192
+                      stop:
+                        type: integer
+                        example: 194
+                  equipmentNames:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  themes:
+                    allOf:
+                      - $ref: "#/components/schemas/valNameDescTypeArr"
+                      - type: string
+                        enum: ["intellibrite", "magicstream", null]
+                  colors:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  circuits:
+                    $ref: "#/components/schemas/configCircuits"
+                  lightGroups:
+                    $ref: "#/components/schemas/configLightGroups"
+                  maxFeatures:
+                    type: integer
+              examples:
+                lightGroup:
+                  $ref: "#/components/examples/configOptionsLightGroups"
+  /config/options/features/:
+    get:
+      summary: Get all available options to set features
+      description: "Returns: maxCircuitGroups, equipmentNames, circuits, circuitGroups"
+      tags:
+        - config
+        - options
+        - features
+      responses:
+        "200":
+          description: Object containing all available general options for the circuit groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invalidIds:
+                    type: array
+                    items:
+                      type: integer
+                  equipmentIds:
+                    type: object
+                    properties:
+                      start:
+                        type: integer
+                      stop:
+                        type: integer
+                  equipmentNames:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  functions:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  features:
+                    $ref: "#/components/schemas/configFeatures"
+                  maxFeatures:
+                    type: integer
+  /config/options/bodies/:
+    get:
+      summary: Get all available options to set bodies
+      description: "Returns: maxBodies, bodyTypes, bodies"
+      tags:
+        - config
+        - options
+        - bodies
+      responses:
+        "200":
+          description: Object containing all available general options for the bodies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bodyTypes:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  bodies:
+                    $ref: "#/components/schemas/configBodies"
+                  maxBodies:
+                    type: integer
+  /config/options/valves/:
+    get:
+      summary: Get all available options to set valves
+      description: "Returns: maxValves, valveTypes, circuits, valves"
+      tags:
+        - config
+        - options
+        - valves
+      responses:
+        "200":
+          description: Object containing all available general options for the valves
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valveTypes:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  circuits:
+                    $ref: "#/components/schemas/configCircuits"
+                  valves:
+                    $ref: "#/components/schemas/configValves"
+                  maxValves:
+                    type: integer
+  /config/options/pumps/:
+    get:
+      summary: Get all available options to set pumps
+      description: "Returns: maxPumps, pumpUnits, pumpTypes, models, circuits, bodies, pumps"
+      tags:
+        - config
+        - pumps
+        - options
+      responses:
+        "200":
+          description: Object containing all available general options for the pumps
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pumpUnits:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  pumpTypes:
+                    allOf:
+                      - $ref: "#/components/schemas/valNameDescObj"
+                      - type: object
+                        properties:
+                          maxCircuits:
+                            type: integer
+                          hasAddress:
+                            type: boolean
+                          hasBody:
+                            type: boolean
+                  models:
+                    $ref: "#/components/schemas/configPumpModels"
+                  circuits:
+                    $ref: "#/components/schemas/configCircuits"
+                  bodies:
+                    $ref: "#/components/schemas/configBodies"
+                  pumps:
+                    $ref: "#/components/schemas/configPumps"
+                  maxPumps:
+                    type: integer
+  /app/options/logger/:
+    get:
+      summary: Get all available options to set logger
+      description: "Returns: app logger"
+      tags:
+        - app
+        - logger
+        - options
+      responses:
+        "200":
+          description: Object containing all available options for the logger
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configLogger"
+              example:
+                {
+                  "logger":
+                    {
+                      "packet":
+                        {
+                          "enabled": true,
+                          "logToConsole": false,
+                          "logToFile": false,
+                          "filename": "packetLog",
+                          "invalid": true,
+                          "broadcast":
+                            {
+                              "enabled": false,
+                              "includeActions": [],
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeActions": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                          "pump":
+                            {
+                              "enabled": false,
+                              "includeActions": [],
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeActions": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                          "chlorinator":
+                            {
+                              "enabled": false,
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                          "intellichem":
+                            {
+                              "enabled": true,
+                              "includeActions": [],
+                              "exclueActions": [],
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                          "intellivalve":
+                            {
+                              "enabled": true,
+                              "includeActions": [],
+                              "exclueActions": [],
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                          "unidentified":
+                            {
+                              "enabled": true,
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                          "unknown":
+                            {
+                              "enabled": true,
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                        },
+                      "app":
+                        {
+                          "enabled": true,
+                          "level": "debug",
+                          "captureForReplay": false,
+                        },
+                    },
+                }
+
+  /config/options/schedules/:
+    get:
+      summary: Get all available options to set schedules
+      description: "Returns: maxSchedules, tempUnits, scheduleTimeTypes, schedules, scheduleTypes, scheduleDays,"
+      tags:
+        - config
+        - options
+        - schedules
+      responses:
+        "200":
+          description: Object containing all available general options for the schedules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tempUnits:
+                    $ref: "#/components/schemas/valNameDescObj"
+                  scheduleTimeTypes:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  scheduleTypes:
+                    $ref: "#/components/schemas/configScheduleTypesArr"
+                  scheduleDays:
+                    $ref: "#/components/schemas/configScheduleDaysArr"
+                  heatSources:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  circuits:
+                    $ref: "#/components/schemas/configCircuits"
+                  schedules:
+                    $ref: "#/components/schemas/configSchedules"
+                  maxSchedules:
+                    type: integer
+                  clockMode:
+                    type: integer
+                    enum: [12, 24]
+
+  /config/options/heaters/:
+    get:
+      summary: Get all available options to set heaters
+      description: "Returns: maxHeaters, heaters, heaterTypes, heatModes"
+      tags:
+        - config
+        - options
+        - heaters
+        - bodies
+      responses:
+        "200":
+          description: Object containing all available general options for the heaters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  heatModes:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  heaterTypes:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  heaters:
+                    $ref: "#/components/schemas/configHeaters"
+                  maxHeaters:
+                    type: integer
+  /config/options/customNames/:
+    get:
+      summary: Get a list of custom names (*Touch only)
+      description: "Returns: customNames, maxCustomNames. (*Touch only)"
+      tags:
+        - config
+        - options
+        - custom names
+      operationId: getCustomNames
+      responses:
+        "200":
+          description: Object with maxCustomNames and customNames
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customNames:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                  maxCustomNames:
+                    type: integer
+              example:
+                {
+                  "maxCustomNames": 10,
+                  "customNames":
+                    [
+                      { "id": 0, "name": "WtrFall 1" },
+                      { "id": 1, "name": "WtrFall 1.5" },
+                      { "id": 2, "name": "WtrFall 2" },
+                      { "id": 3, "name": "WtrFall 3" },
+                      { "id": 4, "name": "Pool High" },
+                      { "id": 5, "name": "Pool LtDeep" },
+                      { "id": 8, "name": "USERNAME-09" },
+                      { "id": 9, "name": "USERNAME-aa" },
+                      { "id": 6, "name": "Pool LtShlw" },
+                      { "id": 7, "name": "USERNAME-08" },
+                    ],
+                }
+  /config/options/chemControllers/:
+    get:
+      summary: Get all available options to set chem controllers
+      description: "Returns: types, bodies, tempUnits, status, status1, status2, waterflow, controllers, maxChemControllers"
+      tags:
+        - config
+        - options
+        - chem controllers
+      responses:
+        "200":
+          description: Object containing all available general options for the chlorinators
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  types:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  bodies:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  tempUnits:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  status:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  status1:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  status2:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  waterFlow:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  controllers:
+                    $ref: "#/components/schemas/configChemControllers"
+                  maxChemControllers:
+                    type: integer
+
+  /config/options/chlorinators/:
+    get:
+      summary: Get all available options to set chlorinators
+      description: "Returns: types, bodies, chlorinators, maxChlorinators"
+      tags:
+        - config
+        - options
+        - chlorinators
+      responses:
+        "200":
+          description: Object containing all available general options for the chlorinators
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  types:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  bodies:
+                    $ref: "#/components/schemas/valNameDescArr"
+                  chlorinators:
+                    $ref: "#/components/schemas/configChlorinators"
+                  maxChlorinators:
+                    type: integer
+  /config/general/:
+    put:
+      summary: Set options related to the "Pool" section in poolConfig.json.
+      description: "To set general settings, send an object with the value you want to change from /config/options/general."
+      tags:
+        - config
+        - pool
+        - general
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: "#/components/schemas/configGeneralOptions"
+                - $ref: "#/components/schemas/configGeneralLocation"
+                - $ref: "#/components/schemas/configGeneralOwner"
+                - type: object
+                  properties:
+                    alias:
+                      type: string
+              example:
+                {
+                  "options":
+                    {
+                      "clockMode": 24,
+                      "clockSource": "server",
+                      "adjustDST": true,
+                    },
+                  "location": { "timeZone": 131 },
+                  "owner": { "name": "Pool Boy" },
+                }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: "#/components/schemas/configGeneralOptions"
+                  - $ref: "#/components/schemas/configGeneralLocation"
+                  - $ref: "#/components/schemas/configGeneralOwner"
+                  - type: object
+                    properties:
+                      alias:
+                        type: string
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/valve/:
+    put:
+      summary: Set options related to the "Valve" section in poolConfig.json
+      description: "To set valve settings, send an object with the values you want to change from /config/options/general."
+      tags:
+        - config
+        - valves
+      requestBody:
+        description: Create/Update a valve
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configValve"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configValve"
+              example:
+                {
+                  "id": 1,
+                  "circuit": 128,
+                  "isActive": true,
+                  "name": "Solar",
+                  "type": 0,
+                  "isReturn": false,
+                  "isIntake": false,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/body/:
+    put:
+      summary: Set options related to the "Body" section in poolConfig.json
+      description: "To set body settings, send an object with the values you want to change from /config/options/bodies."
+      tags:
+        - config
+        - bodies
+      requestBody:
+        description: Create/Update a body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configBody"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configBody"
+              example:
+                {
+                  "id": 2,
+                  "name": "Spa",
+                  "type": 0,
+                  "isActive": true,
+                  "heatMode": 3,
+                  "circuit": 1,
+                  "setPoint": 95,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/circuit/:
+    put:
+      summary: Set options related to the "Circuit" section in poolConfig.json
+      description: "To set circuit settings, send an object with the values you want to change from /config/options/bodies."
+      tags:
+        - config
+        - circuits
+      requestBody:
+        description: Create/Update a circuit
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configCircuit"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configCircuit"
+              example:
+                {
+                  "id": 1,
+                  "name": "Spa",
+                  "nameId": 72,
+                  "type": 1,
+                  "isActive": true,
+                  "freeze": false,
+                  "showInFeatures": true,
+                  "eggTimer": 0,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a circuit at the specified id
+      description: "Delete a circuit at the specified id"
+      tags:
+        - config
+        - circuits
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              example: { "id": 19, "isActive": false }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/feature/:
+    put:
+      summary: Set options related to the "Circuit" section in poolConfig.json
+      description: "To set feature settings, send an object with the values you want to change from /config/options/features."
+      tags:
+        - config
+        - features
+      requestBody:
+        description: Create/Update a feature
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configFeature"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configFeature"
+              example:
+                {
+                  "id": 12,
+                  "name": "Waterfall 1",
+                  "nameId": 87,
+                  "type": 0,
+                  "isActive": true,
+                  "freeze": false,
+                  "showInFeatures": true,
+                  "eggTimer": 420,
+                  "macro": false,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a feature at the specified id
+      description: "Delete a feature at the specified id"
+      tags:
+        - config
+        - features
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              example: { "id": 19, "isActive": false }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/circuitGroup/:
+    put:
+      summary: Set options related to the "Circuit Groups" section in poolConfig.json
+      description: "To set feature settings, send an object with the values you want to change from /config/options/circuitGroups."
+      tags:
+        - config
+        - circuit groups
+      requestBody:
+        description: Create/Update a circuitGroup
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configCircuitGroup"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configCircuitGroup"
+              example: { "Need Example" }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a circuit group at the specified id
+      description: "Delete a circuit group at the specified id"
+      tags:
+        - config
+        - circuit groups
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              example: { "id": 19, "isActive": false }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/lightGroup/:
+    put:
+      summary: Set options related to the "lightGroups" section in poolConfig.json
+      description: |-
+        To set feature settings, send an object with the values you want to change from /config/options/lightGroups.
+
+        *NOTE:* Circuits can be omitted, but if you include them ALL circuits must be sent.  To delete all circuits, 
+        send an empty array `[]`.
+      tags:
+        - config
+        - light groups
+      requestBody:
+        description: Create/Update a light group
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configLightGroup"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configLightGroup"
+              example:
+                {
+                  "id": 192,
+                  "circuits":
+                    [
+                      {
+                        "id": 1,
+                        "circuit": 2,
+                        "position": 2,
+                        "color": 6,
+                        "swimDelay": 0,
+                        "isActive": true,
+                      },
+                      {
+                        "id": 2,
+                        "circuit": 7,
+                        "position": 2,
+                        "color": 14,
+                        "swimDelay": 2,
+                        "isActive": true,
+                      },
+                      {
+                        "id": 3,
+                        "circuit": 8,
+                        "position": 3,
+                        "color": 2,
+                        "swimDelay": 4,
+                        "isActive": true,
+                      },
+                    ],
+                  "isActive": true,
+                  "name": "Intellibrite",
+                  "type": 3,
+                  "lightingTheme": 195,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a light group at the specified id
+      description: "Delete a light group at the specified id"
+      tags:
+        - config
+        - light groups
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              example: { "id": 192, "isActive": false }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/pump/:
+    put:
+      summary: Set options related to the "pumps" section in poolConfig.json
+      description: |-
+        To set schedule settings, send an object with the values you want to change from /config/options/pumps.
+
+        *NOTE:* Circuits can be omitted, but if you include them ALL circuits must be sent.  To delete all circuits, 
+        send an empty array `[]`.
+      tags:
+        - config
+        - pumps
+      requestBody:
+        description: Create/Update a pump
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configPump"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configPump"
+              example:
+                {
+                  "id": 1,
+                  "type": 128,
+                  "address": 96,
+                  "isActive": true,
+                  "model": 0,
+                  "circuits":
+                    [
+                      { "id": 1, "circuit": 255, "speed": 1830, "units": 0 },
+                      { "id": 2, "circuit": 4, "speed": 2460, "units": 0 },
+                    ],
+                  "primingSpeed": 3000,
+                  "primingTime": 1,
+                  "minSpeed": 450,
+                  "maxSpeed": 3450,
+                  "speedStepSize": 10,
+                  "name": "Pool",
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a pump at the specified id
+      description: "Delete a pump at the specified id"
+      tags:
+        - config
+        - pumps
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              example: { "id": 19, "isActive": false }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/customNames/:
+    put:
+      summary: Set custom names on OCP (*Touch only)
+      description: "Set custom names on OCP (*Touch only)"
+      tags:
+        - config
+        - custom names
+      requestBody:
+        description: Create/Update a custom name
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+            example:
+              [
+                { "id": 0, "name": "WtrFall 1" },
+                { "id": 1, "name": "WtrFall 1.5" },
+                { "id": 2, "name": "WtrFall 2" },
+                { "id": 3, "name": "WtrFall 3" },
+                { "id": 4, "name": "Pool High" },
+                { "id": 5, "name": "Pool LtDeep" },
+                { "id": 8, "name": "USERNAME-09" },
+                { "id": 9, "name": "USERNAME-aa" },
+                { "id": 6, "name": "Pool LtShlw" },
+                { "id": 7, "name": "USERNAME-08" },
+              ]
+
+      responses:
+        "200":
+          description: Object with custom name
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+          links:
+            GetCustomNameLink:
+              description: >
+                The `id` value returned by /config/options/customNames can be used
+                as the `id` value when setting the custom name.
+              operationId: getCustomNames
+              parameters:
+                id: "$response.body#/id"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/customName/:
+    put:
+      summary: Set a single custom names on OCP (*Touch only)
+      description: "Set a single custom names on OCP (*Touch only)"
+      tags:
+        - config
+        - custom names
+      requestBody:
+        description: Create/Update a custom name
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+            example: { "id": 0, "name": "WtrFall 1" }
+
+      responses:
+        "200":
+          description: Object with custom name
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+          links:
+            GetCustomNameLink:
+              description: >
+                The `id` value returned by /config/options/customNames can be used
+                as the `id` value when setting the custom name.
+              operationId: getCustomNames
+              parameters:
+                id: "$response.body#/id"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /config/schedule/{id}/:
+    get:
+      summary: |-
+        Get an individual schedule
+        This endpoint will be going away.  Please use /config/schedules or /config/options/schedules instead.
+      description: "Get an individual schedule"
+      tags:
+        - config
+        - schedules
+      deprecated: true
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Circuit object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configCircuit"
+
+  /config/schedule/:
+    put:
+      summary: Set options related to the "schedules" section in poolConfig.json
+      description: |-
+        To set schedule settings, send an object with the values you want to change from /config/options/schedules.
+      tags:
+        - config
+        - schedules
+      requestBody:
+        description: Create/Update a schedule
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configSchedule"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configSchedule"
+              example:
+                {
+                  "id": 1,
+                  "circuit": 6,
+                  "startTime": 495,
+                  "endTime": 960,
+                  "isActive": true,
+                  "scheduleDays": 127,
+                  "runOnce": 128,
+                  "scheduleType": 128,
+                  "startTimeType": 0,
+                  "endTimeType": 0,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a schedule at the specified id
+      description: "Delete a schedule at the specified id"
+      tags:
+        - config
+        - schedules
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              example: { "id": 19, "isActive": false }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/chlorinator/:
+    put:
+      summary: Set options related to the "chlorinators" section in poolConfig.json
+      description: |-
+        To set schedule settings, send an object with the values you want to change from /config/options/chlorinators.
+      tags:
+        - config
+        - chlorinators
+      requestBody:
+        description: Create/Update a chlorinator
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configChlorinator"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configChlorinator"
+              example:
+                {
+                  "id": 1,
+                  "address": 80,
+                  "isActive": true,
+                  "body": 32,
+                  "spaSetpoint": 15,
+                  "poolSetpoint": 2,
+                  "superChlor": true,
+                  "superChlorHours": 10,
+                  "name": "Intellichlor--40",
+                  "type": 2,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/circuits/names/:
+    get:
+      summary: |-
+        Get a list of valid controller names for circuits (*Touch only)
+        This endpoint will be going away.  Please use the equipmentNames object in
+        /config/options/circuits or /config/options/features instead.
+      description: "Get a list of valid controller names for circuits"
+      tags:
+        - config
+        - circuits
+      deprecated: true
+      responses:
+        "200":
+          description: Array of controller function objects valid for names
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/valNameDescArr"
+
+  /config/circuits/functions/:
+    get:
+      summary: |-
+        Get a list of valid controller functions for circuits
+        This endpoint is going away.  Use the functions object in /config/options/circuits
+        or /config/options/features instead.
+      description: "Get a list of valid controller functions for circuits"
+      tags:
+        - config
+        - circuits
+      deprecated: true
+      responses:
+        "200":
+          description: Array of controller function objects valid for circuits
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/valNameDescArr"
+
+  /config/features/functions/:
+    get:
+      summary: |-
+        Get a list of valid controller functions for features
+        This endpoint is going away.  Use the functions object in /config/options/circuits
+        or /config/options/features instead.
+      description: "Get a list of valid controller functions for features"
+      tags:
+        - config
+        - features
+      deprecated: true
+      responses:
+        "200":
+          description: Array of controller function objects valid for features
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/valNameDescArr"
+
+  /config/chlorinator/:id/:
+    get:
+      summary: Get a single chlorinator object
+      description: "Get a single chlorinator object"
+      tags:
+        - chlorinators
+        - config
+      responses:
+        "200":
+          description: Chlorinator object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configChlorinator"
+
+  /config/chlorinators/search/:
+    get:
+      summary: Start a search for standalone chlorinators
+      description: "Start a search for standalone chlorinators"
+      tags:
+        - chlorinators
+        - virtual controllers
+      responses:
+        "200":
+          description: Chlorinator object (isActive and isVirtual should be checked)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configChlorinator"
+
+  /config/pump/:pumpId/:
+    delete:
+      summary: Delete a pump at the specified Id
+      description: "Delete a pump at the specified Id"
+      deprecated: true
+      tags:
+        - config
+        - pumps
+      responses:
+        "200":
+          description: Array of
+
+  /config/dateTime/:
+    put:
+      summary: Set date and time options
+      description: Set date and time options
+      tags:
+        - config
+        - date and time
+      requestBody:
+        description: Update the date/time
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configDateTime"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configDateTime"
+
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /config/options/dateTime/:
+    get:
+      summary: |-
+        Get days of week that are valid for the current OCP.  This can also be retrieved as `scheduleDays` in the /config/options/schedules object.
+      description: "Get Days of week; info now contained in /config/options/schedules"
+      tags:
+        - config
+        - date and time
+      responses:
+        "200":
+          description: Array of days
+
+  /config/lightGroups/themes/:
+    get:
+      summary: |-
+        Get a list of light group themes 
+        This endpoint is going away.  Use themes object in /config/options/lightGroups instead.
+      description: "Get a list of light group themes"
+      tags:
+        - config
+        - light groups
+      deprecated: true
+      responses:
+        "200":
+          description: Array of
+
+  /config/lightGroup/{id}/:
+    get:
+      summary: Get a single lightGroup at the specified id
+        This endpoint is going away.  Use /config/lightGroups or /config/options/lightGroups instead.
+      description: "Get a single lightGroup at the specified id"
+      tags:
+        - config
+        - light groups
+      deprecated: true
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Object with deep linking
+
+  /config/lightGroup/colors/:
+    get:
+      summary: |-
+        Get lightgroup colors, theme, action
+        This endpoint is going away.  Use /config/lightGroups or /config/options/lightGroups instead.
+      description: "Get lightgroup colors, theme, action"
+      tags:
+        - broken
+        - config
+        - light groups
+      deprecated: true
+      responses:
+        "200":
+          description: Object of items...
+  /config/lightGroup/{id}/setColors/:
+    put:
+      summary: |-
+        set lg attribs
+        This endpoint is going away.  Use /config/lightGroup instead.
+      description: ""
+      deprecated: true
+      tags:
+        - light groups
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Array of
+  /config/intellibrite/themes/:
+    get:
+      summary: |-
+        Get lightGroup themes - can be retrieved with /config/options/lightGroups; also it sends enumerated state info and not just identifiers.
+        This endpoint is going away.  Use themes object in /config/options/lightGroups instead.
+      description: ""
+      tags:
+        - light groups
+      deprecated: true
+      responses:
+        "200":
+          description: Array of
+  /config/circuitGroup/{id}/:
+    get:
+      summary: Get a single circuit group at the specified id
+      description: "Get a single circuit group at the specified id"
+      tags:
+        - config
+        - circuit groups
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Circuit group extended object
+  /config/chemController/search/:
+    get:
+      summary: NOT IMPLEMENTED YET.  Begin a search on the server for any chem controllers
+      description: "Begin a search on the server for any chem controllers"
+      tags:
+        - chem controllers
+        - config
+        - virtual controllers
+        - not implemented yet
+      responses:
+        "200":
+          description: "Searching for chem controllers."
+  /config/chemController/:
+    put:
+      summary: Set options related to the "chemControllers" section in poolConfig.json
+      description: |-
+        To set schedule settings, send an object with the values you want to change from /config/options/chemControllers.
+      tags:
+        - config
+        - chem controllers
+      requestBody:
+        description: Create/Update a chem controller
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configChemController"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configChemController"
+              example:
+                {
+                  "id": 1,
+                  "type": 3,
+                  "isActive": true,
+                  "isVirtual": true,
+                  "name": "Chem Controller",
+                  "pHSetpoint": 7.4,
+                  "orpSetpoint": 660,
+                  "alkalinity": 40,
+                  "calciumHardness": 710,
+                  "cyanuricAcid": 10,
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /config/:
+    get:
+      summary: Shortcut for /config/all
+      description: "Shortcut for /config/all"
+      tags:
+        - config
+      responses:
+        "200":
+          description: poolConfig.json
+  /config/{section}/:
+    get:
+      summary: Return a section of poolConfig.json
+      description: "Return a section of poolConfig.json"
+      tags:
+        - config
+      parameters:
+        - in: path
+          required: true
+          name: section
+          schema:
+            type: string
+            default: all
+            enum:
+              - all
+              - pool
+              - equipment
+              - configVersion
+              - bodies
+              - schedules
+              - circuits
+              - features
+              - pumps
+              - chlorinators
+              - valves
+              - heaters
+              - configVersion
+              - circuitGroups
+              - lightGroups
+              - remotes
+              - security
+              - customNames
+              - eggTimers
+              - chemControllers
+              - appVersion
+              - lastUpdated
+              - general
+              - controllerType
+              - covers
+      responses:
+        "200":
+          description: "{Section} of poolConfig.json"
+  /app/logger/setOptions/:
+    put:
+      summary: Set options related to the "log" section in config.json
+      description: |-
+        To set logger settings, send an object with the values you want to change from /config/options/logger.
+      tags:
+        - app
+        - logger
+      requestBody:
+        description: Update logger options
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configLogger"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configLogger"
+              example:
+                {
+                  "logger":
+                    {
+                      "packet":
+                        {
+                          "enabled": true,
+                          "logToConsole": false,
+                          "logToFile": false,
+                          "filename": "packetLog",
+                          "invalid": true,
+                          "broadcast":
+                            {
+                              "enabled": false,
+                              "includeActions": [],
+                              "includeSource": [],
+                              "includeDest": [],
+                              "excludeActions": [],
+                              "excludeSource": [],
+                              "excludeDest": [],
+                            },
+                        },
+                      "app":
+                        {
+                          "enabled": true,
+                          "level": "debug",
+                          "captureForReplay": false,
+                        },
+                    },
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /app/logger/clearMessages/:
+    put:
+      summary: Delete current logfile from disk
+      description: Delete current logfile from disk
+      tags:
+        - logger
+        - app
+      responses:
+        "200":
+          description: Success
+  /app/message/broadcast/actions/:
+    get:
+      summary: Get all broadcast packets identifiers
+      description: "Get all broadcast packets identifiers"
+      tags:
+        - packets
+        - app
+      responses:
+        "200":
+          description: Array of broadcast actions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/valNameDescArr"
+  /app/config/reload/:
+    put:
+      summary: Reload the app with files from disk
+      description: "Reload the app with files from disk"
+      tags:
+        - config
+        - app
+      responses:
+        "200":
+          description: Successful Reload
+  /app/config/startPacketCapture/:
+    get:
+      summary: Starts a packet capture on the server WITHOUT a reset
+      description: "This will start a packet capture and turn on all logging necessary to submit a bug request.  End with /stopPacketCapture."
+      tags:
+        - packet capture
+        - app
+        - config
+      responses:
+        "200":
+          description: "OK"
+  /app/config/startPacketCaptureWithoutReset/:
+    get:
+      summary: Starts a packet capture on the server WITH a reset
+      description: "This will start a packet capture and turn on all logging necessary to submit a bug request.  End with /stopPacketCapture."
+      tags:
+        - packet capture
+        - app
+        - config
+      responses:
+        "200":
+          description: "OK"
+  /app/config/stopPacketCapture/:
+    get:
+      summary: Stop an in-progress packet capture and download a zipped file
+      description: "Stop an in-progress packet capture and download a zipped file"
+      tags:
+        - packet capture
+        - config
+      responses:
+        "200":
+          description: Zip file of packet capture
+          content:
+            zip:
+              schema:
+                type: string
+                format: binary
+
+  #########  STATE API BEGIN  ############
+  /state/all/:
+    get:
+      summary: Return all sections for the current state of the pool
+      description: Retrieve a JSON object of all sections
+      tags:
+        - state
+      responses:
+        "200":
+          description: JSON Object
+  /state/{section}/:
+    get:
+      summary: Return a section of poolState.json
+      description: "Return a section of poolState.json"
+      tags:
+        - state
+      parameters:
+        - in: path
+          required: true
+          name: section
+          schema:
+            type: string
+            default: all
+            enum:
+              - all
+              - equipment
+              - circuits
+              - features
+              - pumps
+              - chlorinators
+              - valves
+              - heaters
+              - circuitGroups
+              - lightGroups
+              - chemControllers
+              - schedules
+              - temps
+              - covers
+      responses:
+        "200":
+          description: "{Section} of poolConfig.json"
+  /state/chemController/{id}/:
+    get:
+      summary: Return an individual chem controller object
+      description: "Return an individual chem controller object"
+      tags:
+        - state
+        - chem controllers
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+          description: Id of the chem controller
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configChemController"
+              example:
+                $ref: "#/components/examples/stateChemController"
+  /state/chemControllers/:
+    get:
+      summary: Return an individual chem controller object
+      description: "Return an individual chem controller object"
+      tags:
+        - config
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/configChemControllers"
+              example:
+                type: array
+                items:
+                  $ref: "#/components/examples/stateChemController"
+  /state/chlorinator/{id}/:
+    get:
+      summary: Return an individual chlorinator object
+      description: "Return an individual chlorinator object"
+      tags:
+        - state
+        - chlorinators
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+          description: Id of the chlorinator
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateChlorinator"
+              example:
+                $ref: "#/components/examples/stateChlorinator"
+  /state/chlorinator/:
+    put:
+      summary: Set attributes for a given chlorinator
+      description: |-
+        See /config/options/chlorinators for values that can be sent
+      tags:
+        - state
+        - chlorinators
+      requestBody:
+        description: Update chlorinator values
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configChlorinator"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateChlorinator"
+              example:
+                $ref: "#/components/examples/stateChlorinator"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/chlorinator/setChlor:
+    put:
+      summary: Set attributes for a given chlorinator.  Duplicate of /state/chlorinator.
+      description: |-
+        See /config/options/chlorinators for values that can be sent
+      tags:
+        - state
+        - chlorinators
+      deprecated: true
+      requestBody:
+        description: Update chlorinator values
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/configChlorinator"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateChlorinator"
+              example:
+                $ref: "#/components/examples/stateChlorinator"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/chlorinator/superChlorinate:
+    put:
+      summary: Set super chlorinate true for a chlorinator.  
+      description: |-
+        Set super chlorinate true for a chlorinator.  Will set superChlorHours to 24.  Attributes can be set via /state/setChlor.
+      tags:
+        - state
+        - chlorinators
+      deprecated: true
+      requestBody:
+        description: Update chlorinator values
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                superChlorinate:
+                  type: boolean
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateChlorinator"
+              example:
+                $ref: "#/components/examples/stateChlorinator"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/chlorinator/superChlorHours:
+    put:
+      summary: Set super chlorinate hours for a chlorinator.  
+      description: |-
+        Set super chlorinate hours for a chlorinator.  Will set superChlor to true.
+        Attributes can be set via /state/setChlor.
+      tags:
+        - state
+        - chlorinators
+      deprecated: true
+      requestBody:
+        description: Update chlorinator values
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                hour:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateChlorinator"
+              example:
+                $ref: "#/components/examples/stateChlorinator"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/chlorinator/poolSetpoint:
+    put:
+      summary: Set pool Setpoint for a given chlorinator. This can be set with /state/chlorinator.
+      description: |-
+        Set poolSetpoint for a chlorinator
+      tags:
+        - temps
+        - virtual controllers
+      deprecated: true
+      requestBody:
+        description: Update chlorinator values
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                setPoint:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateChlorinator"
+              example:
+                $ref: "#/components/examples/stateChlorinator"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/chlorinator/spaSetpoint:
+    put:
+      summary: Set spa Setpoint for a given chlorinator. This can be set with /state/chlorinator.
+      description: |-
+        Set spa Setpoint for a chlorinator
+      tags:
+        - temps
+        - virtual controllers
+      deprecated: true
+      requestBody:
+        description: Update chlorinator values
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                setPoint:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateChlorinator"
+              example:
+                $ref: "#/components/examples/stateChlorinator"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/circuit/{id}/:
+    get:
+      summary: Return an individual circuit object
+      description: "Return an individual circuit object"
+      tags:
+        - state
+        - circuits
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+          description: Id of the circuit
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuit"
+              example:
+                {
+                  "id": 6,
+                  "showInFeatures": true,
+                  "isOn": true,
+                  "name": "Pool",
+                  "type": { "val": 2, "name": "pool", "desc": "Pool" },
+                  "nameId": 61,
+                }
+  /state/pump/{id}/:
+    get:
+      summary: Return an individual pump object
+      description: "Return an individual pump object"
+      tags:
+        - state
+        - pumps
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+          description: Id of the pump
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/statePump"
+              example:
+                $ref: "#/components/examples/statePump"
+  /state/circuit/setState/:
+    put:
+      summary: Set options for a circuit in poolState.json
+      description: |-
+        To set circuit settings, send an object with the id and isOn.  isOn can take any thuthy value (true, "true", 1, yes, etc)
+      tags:
+        - state
+        - circuits
+      requestBody:
+        description: Update circuit options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                isOn:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuit"
+              example:
+                $ref: "#/components/examples/stateCircuit"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/circuit/toggleState/:
+    put:
+      summary: Set options for a circuit in poolState.json
+      description: |-
+        To set circuit settings, send an object with the id and it will be toggled.
+      tags:
+        - state
+        - circuits
+      requestBody:
+        description: Update circuit options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuit"
+              example:
+                $ref: "#/components/examples/stateCircuit"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/feature/setState/:
+    put:
+      summary: Set options for a feature in poolState.json
+      description: |-
+        To set feature settings, send an object with the id and isOn.  isOn can take any thuthy value (true, "true", 1, yes, etc)
+      tags:
+        - state
+        - features
+      requestBody:
+        description: Update feature options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                isOn:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateFeature"
+              example:
+                $ref: "#/components/examples/stateFeature"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/feature/toggleState/:
+    put:
+      summary: Set options for a feature in poolState.json
+      description: |-
+        To set feature settings, send an object with the id and it will be toggled.
+      tags:
+        - state
+        - features
+      requestBody:
+        description: Update feature options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuit"
+              example:
+                $ref: "#/components/examples/stateCircuit"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/circuitGroup/setState/:
+    put:
+      summary: Set options for a circuitgroup in poolState.json
+      description: |-
+        To set circuitGroup settings, send an object with the id and isOn.  isOn can take any thuthy value (true, "true", 1, yes, etc)
+      tags:
+        - state
+        - circuit groups
+      requestBody:
+        description: Update circuitgroup options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                isOn:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuitGroup"
+              example:
+                $ref: "#/components/examples/stateCircuitGroup"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/lightGroup/setState/:
+    put:
+      summary: Set options for a lightGroup in poolState.json
+      description: |-
+        To set lightGroup settings, send an object with the id and isOn.  isOn can take any thuthy value (true, "true", 1, yes, etc)
+      tags:
+        - state
+        - light groups
+      requestBody:
+        description: Update lightGroup options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                isOn:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateLightGroup"
+              example:
+                $ref: "#/components/examples/stateLightGroup"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/lightGroup/setTheme/:
+    put:
+      summary: Set options for a lightGroup in poolState.json
+      description: |-
+        To set lightGroup settings, send an object with the id and isOn.  isOn can take any thuthy value (true, "true", 1, yes, etc)
+      tags:
+        - state
+        - light groups
+      requestBody:
+        description: Update lightGroup options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                isOn:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateLightGroup"
+              example:
+                $ref: "#/components/examples/stateLightGroup"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/lightGroup/{id}/colorSync/:
+    put:
+      summary: Set lightGroup at specified Id to colorSync mode
+      description: |-
+        Set lightGroup at specified Id to colorSync mode.
+      tags:
+        - state
+        - light groups
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id of the body
+      responses:
+        "200":
+          description: |-
+            Success.  Returned object will contain an `action` object with name/val/desc properties.  Any value other than 0 ("ready") means the njsPC is counting down a 20s timer for the lights to finish sequencing.  Once they are done, a second emit with 'lightGroup' will return the action to ready state.  
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  action:
+                    $ref: "#/components/schemas/valNameDescObj"
+                  equipmentType:
+                    type: string
+              example:
+                {
+                    "id": 1,
+                    "action": {
+                        "val": 1,
+                        "name": "sync",
+                        "desc": "Synchronizing"
+                    },
+                    "equipmentType": "lightGroup"
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/lightGroup/{id}/colorSet/:
+    put:
+      summary: Set lightGroup at specified Id to color mode
+      description: |-
+        Set lightGroup at specified Id to color mode.  Obtain valid colors from /config/options/lightGroups
+      tags:
+        - state
+        - light groups
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id of the body
+      responses:
+        "200":
+          description: |-
+            Success.  Returned object will contain an `action` object with name/val/desc properties.  Any value other than 0 ("ready") means the njsPC is counting down a 20s timer for the lights to finish sequencing.  Once they are done, a second emit with 'lightGroup' will return the action to ready state.      
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  action:
+                    $ref: "#/components/schemas/valNameDescObj"
+                  equipmentType:
+                    type: string
+              example:
+                {
+                    "id": 1,
+                    "action": {
+                        "val": 1,
+                        "name": "sync",
+                        "desc": "Synchronizing"
+                    },
+                    "equipmentType": "lightGroup"
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/lightGroup/{id}/colorSwim/:
+    put:
+      summary: Set lightGroup at specified Id to colorSwim mode
+      description: |-
+        Set lightGroup at specified Id to colorSwim mode. 
+      tags:
+        - state
+        - light groups
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id of the body
+      responses:
+        "200":
+          description: |-
+            Success.  Returned object will contain an `action` object with name/val/desc properties.  Any value other than 0 ("ready") means the njsPC is counting down a 20s timer for the lights to finish sequencing.  Once they are done, a second emit with 'lightGroup' will return the action to ready state.      
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  action:
+                    $ref: "#/components/schemas/valNameDescObj"
+                  equipmentType:
+                    type: string
+              example:
+                {
+                    "id": 1,
+                    "action": {
+                        "val": 1,
+                        "name": "sync",
+                        "desc": "Synchronizing"
+                    },
+                    "equipmentType": "lightGroup"
+                }
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/circuit/setTheme/:
+    put:
+      summary: Set options for a theme of a circuit in poolState.json
+      description: |-
+        To set theme of a circuit settings, send an object with the id and theme.  Themes are found in /config/options/lightGroups.
+      tags:
+        - state
+        - circuits
+        - lights
+      requestBody:
+        description: Update theme of a circuit options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                theme:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuitGroup"
+              example:
+                $ref: "#/components/examples/stateCircuitGroup"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/circuit/setDimmerLevel/:
+    put:
+      summary: Set options for the dimmer levels of a circuit in poolState.json  
+      description: |-
+        To set dimmer level of a circuit settings, send an object with the id and level.  
+
+        *EXPERIMENTAL* - Should work on IntelliCenter; needs testing on *Touch.
+      tags:
+        - state
+        - circuits
+        - lights
+      requestBody:
+        description: Update dimmer level of a circuit options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                level:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuit"
+              example:
+                $ref: "#/components/examples/stateCircuit"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/temps/:
+    put:
+      summary: Manually input temperatures.  This is only for virtual/standalone controllers.  Values will be overwritten by any OCP
+      description: |-
+        To adjust the temperature, send an object with the current temp.  If there is an offset stored in sys.general.options it will be applied to the input temperature.  (`air` or `solar` can bu used in place of airSensor1/solarSensor1.)
+      tags:
+        - temps
+        - virtual controllers
+      requestBody:
+        description: Update temps for a body
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  airSensor1:
+                    type: integer
+                  temp:
+                    type: integer
+              - type: object
+                properties:
+                  waterSensor1:
+                    type: integer
+                  temp:
+                    type: integer
+              - type: object
+                properties:
+                  waterSensor2:
+                    type: integer
+                  temp:
+                    type: integer
+              - type: object
+                properties:
+                  solarSensor1:
+                    type: integer
+                  temp:
+                    type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateTemps"
+              example:
+                $ref: "#/components/examples/stateTemps"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/body/heatMode/:
+    put:
+      summary: Set heat mode for a body in poolState.json  
+      description: |-
+        To set heat mode of a body, send an object with the id and mode.  `mode` can be a numeric value or string value as referenced in /config/options/heaters.  
+
+      tags:
+        - state
+        - bodies
+        - temps
+      requestBody:
+        description: Update heat mode of a body
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                properties:
+                  body:
+                    type: integer
+                  mode:
+                    type: integer
+              - type: object
+                properties:
+                  body:
+                    type: integer
+                  mode:
+                    type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateCircuit"
+              example:
+                $ref: "#/components/examples/stateCircuit"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/body/setPoint/:
+    put:
+      summary: Set temp for a body in poolState.json  
+      description: |-
+        To set temp of a body, send an object with the id and identifier for the body (name, id or circuit).  See schema example. 
+
+      tags:
+        - state
+        - bodies
+        - temps
+      requestBody:
+        description: Update temp of a body
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                properties:
+                  id:
+                    type: integer
+                  setPoint:
+                    type: integer
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: integer
+              - type: object
+                properties:
+                  circuit:
+                    type: integer
+                  type:
+                    type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/stateBodyTemp"
+              example:
+                $ref: "#/components/examples/stateBodyTemp"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /state/cancelDelay/:
+    put:
+      summary: Cancel all delays on OCP  
+      description: |-
+        Cancel all delays on OCP
+      tags:
+        - state
+        - delays
+      responses:
+        "200":
+          description: "OK"
+        default:
+          description: 400 or 500 return codes (See Schema)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+
+#########  STATE API END    ############
+
+components:
+  schemas:
+    configLogger:
+      anyOf:
+        - type: object
+          properties:
+            packet:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                logToConsole:
+                  type: boolean
+                logToFile:
+                  type: boolean
+                filename:
+                  type: string
+                invalid:
+                  type: boolean
+                broadcast:
+                  type: object
+                  $ref: "#/components/schemas/configBody"
+                pump:
+                  type: object
+                  $ref: "#/components/schemas/configBody"
+                chlorinator:
+                  type: object
+                  $ref: "#/components/schemas/configBody"
+                intellichem:
+                  type: object
+                  $ref: "#/components/schemas/configBody"
+                intellivalve:
+                  type: object
+                  $ref: "#/components/schemas/configBody"
+                unidentified:
+                  type: object
+                  $ref: "#/components/schemas/configBody"
+                unknown:
+                  type: object
+                  $ref: "#/components/schemas/configBody"
+
+        - type: object
+          properties:
+            app:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                level:
+                  enum: ["error", "warn", "info", "debug", "verbose", "silly"]
+                captureForReplay:
+                  type: boolean
+    configLoggerBase:
+      type: object
+      required:
+        - enabled
+        - includeSource
+        - includeDest
+        - excludeSource
+        - excludeDest
+      properties:
+        enabled:
+          type: boolean
+        includeActions:
+          type: array
+          items:
+            type: integer
+        includeSource:
+          type: array
+          items:
+            type: integer
+        includeDest:
+          type: array
+          items:
+            type: integer
+        excludeActions:
+          type: array
+          items:
+            type: integer
+        excludeSource:
+          type: array
+          items:
+            type: integer
+        excludeDest:
+          type: array
+          items:
+            type: integer
+      example:
+        {
+          "enabled": true,
+          "includeActions": [2, 24],
+          "exclueActions": [],
+          "includeSource": [],
+          "includeDest": [80],
+          "excludeSource": [],
+          "excludeDest": [],
+        }
+    Error:
+      description: |-
+        Errors can have the following codes:
+           # HTTP 400 Errors
+            204: Equipment not found
+            210: Equipment Error
+            250: Invalid Equipment Id
+            270: Invalid data
+            280: Invalid data service
+           # HTTP 500 Errors
+            100: Invalid data service
+            500: Error with message
+            501: Error sending outbound message
+            502: Error receiving inbound message
+      type: object
+      properties:
+        stack:
+          type: string
+        message:
+          type: string
+        code:
+          type: integer
+        httpCode:
+          type: integer
+        position:
+          type: object
+          properties:
+            column:
+              type: integer
+            line:
+              type: integer
+            dir:
+              type: string
+            file:
+              type: string
+        name:
+          type: string
+        equipmentType:
+          type: string
+        level:
+          type: string
+      example:
+        {
+          "stack": "ApiError: Invalid group id: 999\n    at IntelliCenterCircuitCommands.deleteCircuitGroupAsync ...",
+          "message": "Invalid group id: 999",
+          "code": 210,
+          "httpCode": 400,
+          "position":
+            {
+              "column": 101,
+              "line": 1356,
+              "dir": "/Users/.../programming/nodejs-poolController/controller/boards",
+              "file": "IntelliCenterBoard.ts",
+            },
+          "name": "EquipmentNotFound",
+          "equipmentType": "CircuitGroup",
+          "level": "error",
+        }
+
+    valNameObj:
+      type: object
+      properties:
+        val:
+          type: integer
+        name:
+          type: string
+    valNameDescArr:
+      type: array
+      items:
+        $ref: "#/components/schemas/valNameDescObj"
+    valNameDescObj:
+      type: object
+      properties:
+        val:
+          type: integer
+        name:
+          type: string
+        desc:
+          type: string
+    valNameDescTypeArr:
+      type: array
+      items:
+        $ref: "#/components/schemas/valNameDescTypeObj"
+    valNameDescTypeObj:
+      type: object
+      properties:
+        val:
+          type: integer
+        name:
+          type: string
+        desc:
+          type: string
+        type:
+          type: string
+    timeZoneObj:
+      type: object
+      properties:
+        val:
+          type: integer
+        name:
+          type: string
+        loc:
+          type: string
+        abbrev:
+          type: string
+        utcOffset:
+          type: integer
+      example:
+        val: 128
+        name: Samoa Standard Time
+        loc: Pacific
+        abbrev: SST
+        utcOffset: -11
+
+    sensorsObj:
+      type: object
+      properties:
+        name:
+          type: string
+        temp:
+          type: integer
+        tempAdj:
+          type: integer
+        binding:
+          type: string
+      example:
+        name: Air Sensor
+        temp: 66
+        tempAdj: 0
+        binding: airTempAdj
+    configDateTime:
+      type: object
+      properties:
+        min:
+          type: integer
+        hour:
+          type: integer
+        date:
+          type: integer
+        month:
+          type: integer
+        year:
+          type: integer
+        dow:
+          type: integer
+        dst:
+          type: integer
+      example:
+        {
+          "hour": 13,
+          "min": 24,
+          "date": 21,
+          "month": 1,
+          "year": 2020,
+          "dst": 1,
+          "dow": 8,
+        }
+    configCircuits:
+      type: array
+      items:
+        $ref: "#/components/schemas/configCircuit"
+    configCircuit:
+      type: object
+      required:
+        - id
+        - name
+        - type
+      properties:
+        id:
+          type: integer
+        isOn:
+          type: boolean
+        name:
+          type: string
+        nameId:
+          type: string
+        type:
+          type: integer
+        isActive:
+          type: boolean
+        freeze:
+          type: boolean
+        showInFeatures:
+          type: boolean
+        eggTimer:
+          type: integer
+        equipmentType:
+          type: string
+      example:
+        id: 1
+        name: Spa
+        nameId: 72
+        type: 1
+        isActive: true
+        freeze: false
+        showInFeatures: true
+        eggTimer: 0
+    configCircuitGroups:
+      type: array
+      items:
+        $ref: "#/components/schemas/configCircuitGroup"
+    configCircuitGroup:
+      type: object
+      required:
+        - id
+        - name
+        - type
+      properties:
+        id:
+          type: integer
+        type:
+          type: integer
+        isActive:
+          type: boolean
+        name:
+          type: string
+        eggTimer:
+          type: integer
+        circuits:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              circuit:
+                type: integer
+      example:
+        {
+          "id": 195,
+          "type": 2,
+          "isActive": true,
+          "circuits":
+            [{ "id": 1, "circuit": 140 }, { "id": 2, "circuit": 131 }],
+          "name": "Group 2",
+          "eggTimer": 720,
+        }
+    configGeneralOptions:
+      type: object
+      properties:
+        adjustDST:
+          type: boolean
+        clockMode:
+          type: integer
+          enum: [12, 24]
+        clockSource:
+          $ref: "#/components/schemas/clockSourceEnum"
+        pumpDelay:
+          type: boolean
+        manualHeat:
+          type: boolean
+        units:
+          type: integer
+      example:
+        adjustDST: false
+        clockMode: 12
+        clockSource: manual
+        pumpDelay: false
+        manualHeat: false
+        units: 0
+    configGeneralOwner:
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        email2:
+          type: string
+        phone2:
+          type: string
+      example:
+        name: "Mrs. Owner"
+        phone: "555-1212"
+        email: "owner@pool.com"
+        email2: "otherowner@pool.com"
+        phone2: "837-5609"
+    configGeneralLocation:
+      type: object
+      properties:
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        timeZone:
+          type: integer
+      example:
+        address: "123 Main St"
+        city: "Anywhere"
+        state: "MO"
+        zip: "33445"
+        country: "US"
+        latitude: "45.2112"
+        longitude: "28.012"
+        timeZone: 6
+    clockSourceEnum:
+      type: string
+      enum: [manual, server, internet]
+      description: >
+        Clock Source Values:
+          * `manual` - OCP keeps time
+          * `server` - njsPC syncs time to OCP
+          * `internet` - IntelliCenter only - OCP syncs with Internet
+    configOptionsGeneral:
+      type: object
+      properties:
+        countries:
+          $ref: "#/components/schemas/valNameDescArr"
+        tempUnits:
+          $ref: "#/components/schemas/valNameDescArr"
+        timeZones:
+          type: array
+          items:
+            $ref: "#/components/schemas/timeZoneObj"
+        clockSources:
+          $ref: "#/components/schemas/valNameDescArr"
+        clockModes:
+          type: array
+          items:
+            $ref: "#/components/schemas/valNameObj"
+        pool:
+          type: object
+          properties:
+            options:
+              $ref: "#/components/schemas/configGeneralOptions"
+            owner:
+              $ref: "#/components/schemas/configGeneralOwner"
+            location:
+              $ref: "#/components/schemas/configGeneralLocation"
+            alias:
+              type: string
+              example: "My pool"
+        sensors:
+          type: array
+          items:
+            $ref: "#/components/schemas/sensorsObj"
+    configOptionsChlorinators:
+      type: object
+      properties:
+        types:
+          $ref: "#/components/schemas/valNameDescObj"
+        bodies:
+          $ref: "#/components/schemas/valNameDescObj"
+    configChlorinators:
+      type: array
+      items:
+        $ref: "#/components/schemas/configChlorinator"
+    configChlorinator:
+      type: object
+      properties:
+        id:
+          type: integer
+        address:
+          type: integer
+        isActive:
+          type: boolean
+        body:
+          type: integer
+        spaSetpoint:
+          type: integer
+        poolSetpoint:
+          type: integer
+        superChlor:
+          type: boolean
+        superChlorHours:
+          type: integer
+        name:
+          type: string
+        type:
+          type: integer
+      example:
+        id: 1
+        address: 80
+        isActive: true
+        body: 32
+        spaSetpoint: 15
+        poolSetpoint: 50
+        superChlor: false
+        superChlorHours: 0
+        name: Intellichlor--40
+        type: 2
+    configChemControllers:
+      type: array
+      items:
+        $ref: "#/components/schemas/configChemController"
+    configChemController:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: integer
+        isActive:
+          type: boolean
+        isVirtual:
+          type: boolean
+        name:
+          type: integer
+        phSetpoint:
+          type: number
+        orpSetpoint:
+          type: boolean
+        alkalinity:
+          type: integer
+        calciumHardness:
+          type: integer
+        cyanuricAcid:
+          type: integer
+      example:
+        {
+          "id": 1,
+          "type": 3,
+          "isActive": true,
+          "isVirtual": true,
+          "name": "Chem Controller",
+          "pHSetpoint": 7.4,
+          "orpSetpoint": 660,
+          "alkalinity": 40,
+          "calciumHardness": 710,
+          "cyanuricAcid": 10,
+        }
+    configHeaters:
+      type: array
+      items:
+        $ref: "#/components/schemas/configHeater"
+    configHeater:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: integer
+        isActive:
+          type: boolean
+        body:
+          type: integer
+        freeze:
+          type: boolean
+        coolingEnabled:
+          type: boolean
+        startTempDelta:
+          type: integer
+        stopTempDelta:
+          type: integer
+      example:
+        id: 2
+        name: Solar Heater
+        type: 2
+        isActive: true
+        body: 32
+        freeze: true
+        coolingEnabled: false
+        startTempDelta: 3
+        stopTempDelta: 2
+    configFeatures:
+      type: array
+      items:
+        $ref: "#/components/schemas/configFeature"
+    configFeature:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameId:
+          type: integer
+        type:
+          type: integer
+        isActive:
+          type: boolean
+        freeze:
+          type: boolean
+        showInFeatures:
+          type: boolean
+        eggTimer:
+          type: integer
+        macro:
+          type: boolean
+      example:
+        id: 11
+        name: Spillway
+        nameId: 79
+        type: 14
+        isActive: true
+        freeze: false
+        showInFeatures: true
+        eggTimer: 0
+        macro: false
+    configLightGroups:
+      type: array
+      items:
+        $ref: "#/components/schemas/configLightGroup"
+    configLightGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        isActive:
+          type: boolean
+        name:
+          type: string
+        type:
+          type: integer
+        lightingTheme:
+          type: integer
+        circuits:
+          type: array
+          items:
+            $ref: "#/components/schemas/configFeature"
+      example:
+        - id: 192
+          circuits:
+            - id: 1
+              circuit: 2
+              position: 2
+              color: 6
+              swimDelay: 0
+              isActive: true
+            - id: 2
+              circuit: 7
+              position: 2
+              color: 14
+              swimDelay: 2
+              isActive: true
+            - id: 3
+              circuit: 8
+              position: 3
+              color: 2
+              swimDelay: 4
+              isActive: true
+          isActive: true
+          name: Intellibrite
+          type: 3
+          lightingTheme: 195
+    configScheduleTypesArr:
+      type: array
+      items:
+        $ref: "#/components/schemas/configScheduleType"
+    configScheduleType:
+      type: object
+      properties:
+        val:
+          type: integer
+        name:
+          type: string
+        desc:
+          type: string
+        startDate:
+          type: boolean
+        startTime:
+          type: boolean
+        endTime:
+          type: boolean
+        days:
+          type: string
+          enum:
+            - single
+            - multi
+            - false
+        heatSource:
+          type: boolean
+        heatSetpoint:
+          type: boolean
+      example:
+        Repeat:
+          {
+            "val": 128,
+            "name": "repeat",
+            "desc": "Repeats",
+            "startDate": false,
+            "startTime": true,
+            "entTime": true,
+            "days": "multi",
+            "heatSource": true,
+            "heatSetpoint": false,
+          }
+        RunOnce:
+          {
+            "val": 0,
+            "name": "runonce",
+            "desc": "Run Once",
+            "startDate": false,
+            "startTime": true,
+            "endTime": false,
+            "days": "single",
+            "heatSource": true,
+            "heatSetpoint": false,
+          }
+    configScheduleDaysArr:
+      type: array
+      items:
+        $ref: "#/components/schemas/configScheduleDay"
+    configScheduleDay:
+      type: object
+      properties:
+        val:
+          type: integer
+        days:
+          type: object
+          properties:
+            name:
+              type: string
+            desc:
+              type: string
+            down:
+              type: integer
+
+      example:
+        { "val": 1, "days": [{ "name": "sun", "desc": "Sunday", "dow": 0 }] }
+    configSchedules:
+      type: array
+      items:
+        $ref: "#/components/schemas/configSchedule"
+    configSchedule:
+      type: object
+      properties:
+        id:
+          type: integer
+        circuit:
+          type: integer
+        startTime:
+          type: integer
+        endTime:
+          type: integer
+        isActive:
+          type: boolean
+        scheduleDays:
+          type: integer
+        runOnce:
+          type: integer
+        scheduleType:
+          type: integer
+        startTimeType:
+          type: integer
+        endTimeType:
+          type: integer
+      example:
+        {
+          "id": 1,
+          "circuit": 6,
+          "startTime": 495,
+          "endTime": 960,
+          "isActive": true,
+          "scheduleDays": 127,
+          "runOnce": 128,
+          "scheduleType": 128,
+          "startTimeType": 0,
+          "endTimeType": 0,
+        }
+    configBodies:
+      type: array
+      items:
+        $ref: "#/components/schemas/configBody"
+    configBody:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: integer
+        capacity:
+          type: integer
+        isActive:
+          type: boolean
+        name:
+          type: string
+        heatMode:
+          type: integer
+        setPoint:
+          type: integer
+        circuit:
+          type: integer
+      example:
+        {
+          "id": 1,
+          "type": 0,
+          "capacity": 34000,
+          "isActive": true,
+          "name": "Pool",
+          "heatMode": 5,
+          "setPoint": 90,
+          "circuit": 6,
+        }
+    configValves:
+      type: array
+      items:
+        $ref: "#/components/schemas/configValve"
+    configValve:
+      type: object
+      properties:
+        id:
+          type: integer
+        circuit:
+          type: integer
+        isIntake:
+          type: boolean
+        isReturn:
+          type: boolean
+        type:
+          type: integer
+        isActive:
+          type: boolean
+        name:
+          type: string
+    configPumpModels:
+      type: object
+      properties:
+        ss:
+          type: array
+          items:
+            $ref: "#/components/schemas/configPumpModel"
+        ds:
+          type: array
+          items:
+            $ref: "#/components/schemas/configPumpModel"
+        vs:
+          type: array
+          items:
+            $ref: "#/components/schemas/configPumpModel"
+        vf:
+          type: array
+          items:
+            $ref: "#/components/schemas/configPumpModels"
+        vsf:
+          type: array
+          items:
+            $ref: "#/components/schemas/configPumpModel"
+        vssvrs:
+          type: array
+          items:
+            $ref: "#/components/schemas/configPumpModel"
+    configPumpModel:
+      anyOf:
+        - allOf:
+            - $ref: "#/components/schemas/valNameDescObj"
+            - type: object
+              properties:
+                loAmps:
+                  type: number
+                hiAmps:
+                  type: number
+                pf:
+                  type: number
+                volts:
+                  type: integer
+                loWatts:
+                  type: integer
+                hiWatts:
+                  type: integer
+            - $ref: "#/components/schemas/valNameDescObj"
+      example:
+        {
+          "val": 3,
+          "name": "generic2hp",
+          "desc": "2hp Pump",
+          "loAmps": 2.9,
+          "hiAmps": 12,
+          "pf": 0.9,
+          "volts": 230,
+          "loWatts": 600,
+          "hiWatts": 2484,
+        }
+    configPumps:
+      type: array
+      items:
+        $ref: "#/components/schemas/configPump"
+    configPump:
+      type: object
+      properties:
+        id:
+          type: integer
+        model:
+          type: integer
+        type:
+          type: integer
+        circuits:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              circuit:
+                type: integer
+              speed:
+                type: integer
+              units:
+                type: integer
+        flowStepSize:
+          type: integer
+        minFlow:
+          type: integer
+        maxFlow:
+          type: integer
+        address:
+          type: integer
+        primingTime:
+          type: integer
+        speedStepSize:
+          type: integer
+        minSpeed:
+          type: integer
+        maxSpeed:
+          type: integer
+        primingSpeed:
+          type: integer
+        name:
+          type: string
+      example:
+        {
+          "val": 3,
+          "name": "generic2hp",
+          "desc": "2hp Pump",
+          "loAmps": 2.9,
+          "hiAmps": 12,
+          "pf": 0.9,
+          "volts": 230,
+          "loWatts": 600,
+          "hiWatts": 2484,
+        }
+
+    ######  BEGIN STATE SCHEMAS ######
+
+    stateChemControllers:
+      type: array
+      items:
+        $ref: "#/components/schemas/stateChemController"
+    stateChemController:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          $ref: "#/components/schemas/valNameDescObj"
+        saltLevel:
+          type: integer
+        status1:
+          $ref: "#/components/schemas/valNameDescObj"
+        status2:
+          $ref: "#/components/schemas/valNameDescObj"
+        temp:
+          type: integer
+        tempUnits:
+          $ref: "#/components/schemas/valNameDescObj"
+        acidTankLevel:
+          enum: [0, 1, 2, 3, 4, 5, 6]
+        orpTankLevel:
+          enum: [0, 1, 2, 3, 4, 5, 6]
+        pHLevel:
+          type: number
+        orpLevel:
+          type: number
+        waterFlow:
+          $ref: "#/components/schemas/valNameDescObj"
+        phDosingTime:
+          type: number
+        orpDosingTime:
+          type: number
+        saturationIndex:
+          type: number
+        equipmentType:
+          type: string
+        alkalinity:
+          type: integer
+        body:
+          $ref: "#/components/schemas/valNameDescObj"
+        calciumHardness:
+          type: integer
+        cyanuricAcid:
+          type: integer
+        orpSetpoint:
+          type: integer
+        pHSetpoint:
+          type: number
+    stateChlorinators:
+      type: array
+      items:
+        $ref: "#/components/schemas/stateChlorinator"
+    stateChlorinator:
+      type: object
+      properties:
+        id:
+          type: integer
+        lastComm:
+          type: integer
+        curruntOutput:
+          type: integer
+        saltLevel:
+          type: integer
+        saltRequired:
+          type: integer
+        status:
+          $ref: "#/components/schemas/valNameDescObj"
+        poolSetpoint:
+          type: integer
+        spaSetpoint:
+          type: integer
+        superChlor:
+          type: boolean
+        superChlorHours:
+          type: number
+        name:
+          type: string
+        body:
+          $ref: "#/components/schemas/valNameDescObj"
+        targetOutput:
+          type: integer
+        type:
+          $ref: "#/components/schemas/valNameDescObj"
+    stateCircuits:
+      type: array
+      items:
+        $ref: "#/components/schemas/stateCircuit"
+    stateCircuit:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameId:
+          type: integer
+        showInFeatures:
+          type: boolean
+        isOn:
+          type: boolean
+        type:
+          $ref: "#/components/schemas/valNameDescObj"
+        equipmentType:
+          type: string
+        lightingTheme:
+          type: integer
+        level:
+          type: integer
+    stateFeatures:
+      type: array
+      items:
+        $ref: "#/components/schemas/stateFeature"
+    stateFeature:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameId:
+          type: integer
+        showInFeatures:
+          type: boolean
+        isOn:
+          type: boolean
+        type:
+          $ref: "#/components/schemas/valNameDescObj"
+        equipmentType:
+          type: string
+    statePumps:
+      type: array
+      items:
+        $ref: "#/components/schemas/statePump"
+    statePump:
+      type: object
+      properties:
+        id:
+          type: integer
+        command:
+          type: integer
+        mode:
+          type: integer
+        driveState:
+          type: integer
+        watts:
+          type: integer
+        gpm:
+          type: integer
+        rpm:
+          type: integer
+        flow:
+          type: integer
+        ppc:
+          type: integer
+        status:
+          $ref: "#/components/schemas/valNameDescObj"
+        time:
+          type: integer
+        type:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            val:
+              type: string
+            desc:
+              type: string
+            maxPrimingTime:
+              type: integer
+            minSpeed:
+              type: integer
+            minFlow:
+              type: integer
+            maxSpeed:
+              type: integer
+            maxFlow:
+              type: integer
+            maxCircuits:
+              type: integer
+            hasAddress:
+              type: boolean
+        name:
+          type: string
+        equipmentType:
+          type: string
+        minSpeed:
+          type: integer
+        maxSpeed:
+          type: integer
+        minFlow:
+          type: integer
+        maxFlow:
+          type: integer
+        speedStepSize:
+          type: integer
+        flowStepSize:
+          type: integer
+        circuits:
+          type: array
+          items:
+            $ref: "#/components/schemas/statePumpCircuit"
+
+    statePumpCircuit:
+      type: object
+      properties:
+        id:
+          type: integer
+        circuit:
+          type: object
+          $ref: "#/components/schemas/stateCircuit"
+        speed:
+          type: integer
+        units:
+          $ref: "#/components/schemas/valNameDescObj"
+
+    stateCircuitGroups:
+      type: array
+      items:
+        $ref: "#/components/schemas/stateCircuitGroup"
+    stateCircuitGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameId:
+          type: integer
+        type:
+          $ref: "#/components/schemas/valNameDescObj"
+        isOn:
+          type: boolean
+        equipmentType:
+          type: string
+        circuits:
+          type: object
+          properties:
+            id:
+              type: integer
+            desiredStateOn:
+              type: boolean
+            circuit:
+              $ref: "#/components/schemas/stateCircuit"
+    stateLightGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        action:
+          $ref: "#/components/schemas/valNameDescObj"
+        name:
+          type: string
+        isActive:
+          type: string
+        type:
+          $ref: "#/components/schemas/valNameDescObj"
+        equipmentType:
+          type: string
+        circuits:
+          type: object
+          properties:
+            id:
+              type: integer
+            desiredStateOn:
+              type: boolean
+            circuit:
+              $ref: "#/components/schemas/stateCircuit"
+        lightingTheme:
+          allOf:
+            - $ref: "#/components/schemas/valNameDescObj"
+            - type: object
+              properties:
+                type: 
+                  type: string
+    stateTemps:
+      type: object
+      properties:
+        units:
+          $ref: "#/components/schemas/valNameDescObj"
+        waterSensor1:
+          type: integer
+        waterSensor2:
+          type: integer
+        air:
+          type: integer
+        solar:
+          type: integer
+        equipmentType:
+          type: string    
+          example: "temps"
+        bodies:
+          type: array
+          items:
+            $ref: "#/components/schemas/stateBodyTemp"
+
+    stateBodyTemp:
+      type: object
+      properties:
+        id:
+          type: integer
+        heatMode:
+          $ref: "#/components/schemas/valNameDescObj"
+        name:
+          type: string
+        circuit:
+          type: integer
+        heatStatus:
+          $ref: "#/components/schemas/valNameDescObj"
+        isOn:
+          type: boolean
+        setPoint:
+          type: integer
+        equipmentType:
+          type: string
+
+  ######  END   STATE SCHEMAS ######
+
+  examples:
+    configOptionsLightGroups:
+      value:
+        maxLightGroups: 1
+        equipmentNames:
+          - val: 1
+            name: aerator
+            desc: Aerator
+          - val: 2
+            name: airblower
+            desc: Air Blower
+          - val: 3
+            name: aux1
+            desc: AUX 1
+          - val: 4
+            name: aux2
+            desc: AUX 2
+        themes:
+          - val: 0
+            name: "off"
+            desc: "Off"
+            type: intellibrite
+          - val: 1
+            name: "on"
+            desc: "On"
+            type: intellibrite
+          - val: 128
+            name: colorsync
+            desc: Color Sync
+            type: intellibrite
+          - val: 144
+            name: colorswim
+            desc: Color Swim
+            type: intellibrite
+        colors:
+          - val: 0
+            name: white
+            desc: White
+          - val: 2
+            name: lightgreen
+            desc: Light Green
+          - val: 4
+            name: green
+            desc: Green
+        circuits:
+          - id: 2
+            name: Pool LtDeep
+            type: 16
+            equipmentType: circuit
+            nameId: 205
+          - id: 7
+            name: Spa Light
+            type: 16
+            equipmentType: circuit
+            nameId: 74
+        lightGroups:
+          - id: 192
+            circuits:
+              - id: 1
+                circuit: 2
+                position: 2
+                color: 6
+                swimDelay: 0
+                isActive: true
+              - id: 2
+                circuit: 7
+                position: 2
+                color: 14
+                swimDelay: 2
+                isActive: true
+              - id: 3
+                circuit: 8
+                position: 3
+                color: 2
+                swimDelay: 4
+                isActive: true
+            isActive: true
+            name: Intellibrite
+            type: 3
+            lightingTheme: 195
+        functions:
+          - val: 0
+            name: generic
+            desc: Generic
+          - val: 1
+            name: spa
+            desc: Spa
+          - val: 2
+            name: pool
+            desc: Pool
+    stateChemController:
+      value:
+        {
+          "id": 1,
+          "type": { "val": 3, "name": "homegrown", "desc": "Homegrown" },
+          "name": "Chem Controller",
+          "status": { "val": 1, "name": "nocomms", "desc": "No Communication" },
+          "saltLevel": 2900,
+          "status1": { "val": 101, "name": "monitoring", "desc": "Monitoring" },
+          "status2": { "val": 20, "name": "ok", "desc": "Ok" },
+          "temp": 86,
+          "tempUnits": { "val": 0, "name": "F", "desc": "Fahrenheit" },
+          "acidTankLevel": 6,
+          "orpTankLevel": 6,
+          "pHLevel": 7.166,
+          "orpLevel": 818.3,
+          "waterFlow": { "val": 0, "name": "ok", "desc": "Ok" },
+          "pHDosingTime": 217,
+          "orpDosingTime": 219,
+          "saturationIndex": -0.034,
+          "equipmentType": "chemController",
+          "alkalinity": 40,
+          "body": { "name": "pool", "desc": "Pool" },
+          "calciumHardness": 710,
+          "cyanuricAcid": 10,
+          "orpSetpoint": 660,
+          "pHSetpoint": 7.4,
+        }
+    stateChlorinator:
+      value:
+        {
+          "id": 1,
+          "lastComm": 1596147442405,
+          "currentOutput": 2,
+          "saltLevel": 2900,
+          "saltRequired": 0,
+          "status": { "val": 0, "name": "ok", "desc": "Ok" },
+          "poolSetpoint": 2,
+          "spaSetpoint": 15,
+          "superChlor": false,
+          "superChlorHours": 0,
+          "name": "Intellichlor--40",
+          "body": { "val": 32, "name": "poolspa", "desc": "Pool/Spa" },
+          "targetOutput": 2,
+          "type": { "val": 2, "name": "aquarite", "desc": "Aquarite" },
+        }
+    statePump:
+      value:
+        {
+          "id": 1,
+          "command": 10,
+          "mode": 0,
+          "driveState": 0,
+          "watts": 693,
+          "rpm": 2250,
+          "flow": 0,
+          "ppc": 0,
+          "status": { "name": "ok", "desc": "Ok", "val": 1 },
+          "time": 929,
+          "type":
+            {
+              "val": 128,
+              "name": "vs",
+              "desc": "Intelliflo VS",
+              "maxPrimingTime": 6,
+              "minSpeed": 450,
+              "maxSpeed": 3450,
+              "maxCircuits": 8,
+              "hasAddress": true,
+            },
+          "name": "Pool",
+          "equipmentType": "pump",
+          "minSpeed": 450,
+          "maxSpeed": 3450,
+          "speedStepSize": 10,
+          "circuits":
+            [
+              {
+                "id": 1,
+                "circuit":
+                  {
+                    "id": 0,
+                    "equipmentType": "circuit",
+                    "name": "Not Used",
+                    "speed": 0,
+                  },
+                "speed": 1830,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+              {
+                "id": 2,
+                "circuit":
+                  {
+                    "id": 4,
+                    "showInFeatures": true,
+                    "isOn": false,
+                    "name": "Cleaner",
+                    "type":
+                      {
+                        "val": 5,
+                        "name": "mastercleaner",
+                        "desc": "Master Cleaner",
+                      },
+                    "nameId": 22,
+                    "equipmentType": "circuit",
+                  },
+                "speed": 2460,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+              {
+                "id": 3,
+                "circuit":
+                  {
+                    "id": 11,
+                    "showInFeatures": true,
+                    "isOn": false,
+                    "name": "Spillway",
+                    "type":
+                      { "val": 14, "name": "spillway", "desc": "Spillway" },
+                    "nameId": 79,
+                    "equipmentType": "feature",
+                  },
+                "speed": 2500,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+              {
+                "id": 4,
+                "circuit":
+                  {
+                    "id": 6,
+                    "showInFeatures": true,
+                    "isOn": true,
+                    "name": "Pool",
+                    "type": { "val": 2, "name": "pool", "desc": "Pool" },
+                    "nameId": 61,
+                    "equipmentType": "circuit",
+                  },
+                "speed": 1800,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+              {
+                "id": 5,
+                "circuit":
+                  {
+                    "id": 1,
+                    "showInFeatures": true,
+                    "isOn": false,
+                    "name": "Spa",
+                    "type": { "val": 1, "name": "spa", "desc": "Spa" },
+                    "nameId": 72,
+                    "equipmentType": "circuit",
+                  },
+                "speed": 1750,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+              {
+                "id": 6,
+                "circuit":
+                  {
+                    "id": 128,
+                    "isOn": true,
+                    "type":
+                      {
+                        "val": 128,
+                        "name": "solar",
+                        "desc": "Solar",
+                        "assignableToPumpCircuit": true,
+                      },
+                    "name": "Solar",
+                    "equipmentType": "virtualCircuit",
+                  },
+                "speed": 2250,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+              {
+                "id": 7,
+                "circuit":
+                  {
+                    "id": 131,
+                    "isOn": false,
+                    "type":
+                      {
+                        "val": 131,
+                        "name": "spaHeater",
+                        "desc": "Spa Heater",
+                        "assignableToPumpCircuit": true,
+                      },
+                    "name": "Spa Heater",
+                    "equipmentType": "virtualCircuit",
+                  },
+                "speed": 2650,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+              {
+                "id": 8,
+                "circuit":
+                  {
+                    "id": 16,
+                    "showInFeatures": true,
+                    "isOn": false,
+                    "name": "Jets",
+                    "type": { "val": 0, "name": "generic", "desc": "Generic" },
+                    "nameId": 46,
+                    "equipmentType": "feature",
+                  },
+                "speed": 3050,
+                "units": { "val": 0, "name": "rpm", "desc": "RPM" },
+              },
+            ],
+        }
+    stateCircuitGroup:
+      value:
+        {
+          "id": 193,
+          "name": "Spa",
+          "nameId": 72,
+          "type": { "val": 2, "name": "circuit", "desc": "Circuit" },
+          "isOn": true,
+          "equipmentType": "circuitGroup",
+          "circuits":
+            [
+              {
+                "id": 1,
+                "circuit":
+                  {
+                    "id": 1,
+                    "showInFeatures": true,
+                    "isOn": true,
+                    "name": "SpaPUMP",
+                    "type": { "val": 1, "name": "spa", "desc": "Spa" },
+                    "nameId": 200,
+                    "equipmentType": "circuit",
+                  },
+                "desiredStateOn": true,
+              },
+              {
+                "id": 2,
+                "circuit":
+                  {
+                    "id": 2,
+                    "showInFeatures": true,
+                    "isOn": true,
+                    "name": "SpaCTRL",
+                    "type": { "val": 0, "name": "generic", "desc": "Generic" },
+                    "nameId": 215,
+                    "equipmentType": "circuit",
+                  },
+                "desiredStateOn": true,
+              },
+              {
+                "id": 9,
+                "circuit":
+                  {
+                    "id": 9,
+                    "showInFeatures": true,
+                    "isOn": true,
+                    "name": "Spa Low",
+                    "type": { "val": 0, "name": "generic", "desc": "Generic" },
+                    "nameId": 75,
+                    "equipmentType": "circuit",
+                  },
+                "desiredStateOn": true,
+              },
+              {
+                "id": 10,
+                "circuit":
+                  {
+                    "id": 10,
+                    "showInFeatures": true,
+                    "isOn": true,
+                    "name": "Spa High",
+                    "type": { "val": 0, "name": "generic", "desc": "Generic" },
+                    "nameId": 73,
+                    "equipmentType": "circuit",
+                  },
+                "desiredStateOn": true,
+              },
+            ],
+        }
+    stateLightGroup:
+      value:
+        {
+          "id": 192,
+          "action": { "val": 0, "name": "ready", "desc": "Ready" },
+          "isActive": true,
+          "name": "Intellibrite",
+          "type": { "val": 3, "name": "intellibrite", "desc": "IntelliBrite" },
+          "equipmentType": "lightGroup",
+          "circuits":
+            [
+              {
+                "id": 1,
+                "circuit":
+                  {
+                    "id": 15,
+                    "showInFeatures": true,
+                    "isOn": false,
+                    "name": "Spa Light",
+                    "type":
+                      {
+                        "val": 16,
+                        "name": "intellibrite",
+                        "desc": "Intellibrite",
+                        "isLight": true,
+                      },
+                    "nameId": 74,
+                    "equipmentType": "circuit",
+                  },
+                "position": 1,
+                "color": 8,
+                "swimDelay": 0,
+                "isActive": true,
+              },
+              {
+                "id": 2,
+                "circuit":
+                  {
+                    "id": 16,
+                    "showInFeatures": true,
+                    "isOn": false,
+                    "name": "Entry Light",
+                    "type":
+                      {
+                        "val": 16,
+                        "name": "intellibrite",
+                        "desc": "Intellibrite",
+                        "isLight": true,
+                      },
+                    "nameId": 28,
+                    "equipmentType": "circuit",
+                  },
+                "position": 1,
+                "color": 8,
+                "swimDelay": 0,
+                "isActive": true,
+              }
+            ],
+          "lightingTheme":
+            {
+              "val": 196,
+              "name": "white",
+              "desc": "White",
+              "type": "intellibrite",
+            },
+        }
+    stateBodyTemp:
+        value:
+          {
+              "id": 1,
+              "heatMode": {
+                  "val": 0,
+                  "name": "off",
+                  "desc": "Off"
+              },
+              "name": "Pool",
+              "circuit": 6,
+              "heatStatus": {
+                  "val": 0,
+                  "name": "off",
+                  "desc": "Off"
+              },
+              "isOn": false,
+              "setPoint": 89,
+          }
+    stateCircuit:
+      value:
+        {
+          "id": 6,
+          "showInFeatures": true,
+          "isOn": true,
+          "name": "Pool",
+          "type": {
+          "val": 2,
+          "name": "pool",
+          "desc": "Pool"
+          },
+          "nameId": 61,
+          "equipmentType": "circuit"
+          }
+    stateFeature:
+        value:
+          {
+          "id": 11,
+          "showInFeatures": true,
+          "isOn": false,
+          "name": "Spillway",
+          "type": {
+          "val": 14,
+          "name": "spillway",
+          "desc": "Spillway"
+          },
+          "nameId": 79,
+          "equipmentType": "feature"
+          }
+    stateTemps:
+      value:
+        {
+            "units": {
+                "val": 0,
+                "name": "F",
+                "desc": "Fahrenheit"
+            },
+            "waterSensor1": 80,
+            "bodies": [
+                {
+                    "id": 1,
+                    "heatMode": {
+                        "val": 0,
+                        "name": "off",
+                        "desc": "Off"
+                    },
+                    "setPoint": 92,
+                    "temp": 80,
+                    "isOn": true,
+                    "name": "Pool",
+                    "circuit": 6,
+                    "heatStatus": {
+                        "val": 0,
+                        "name": "off",
+                        "desc": "Off"
+                    },
+                    "heaterOptions": {
+                        "total": 2,
+                        "gas": 1,
+                        "solar": 1,
+                        "heatpump": 0,
+                        "ultratemp": 0,
+                        "hybrid": 0
+                    }
+                },
+                {
+                    "id": 2,
+                    "isOn": false,
+                    "heatMode": {
+                        "val": 1,
+                        "name": "heater",
+                        "desc": "Heater"
+                    },
+                    "name": "Spa",
+                    "circuit": 1,
+                    "heatStatus": {
+                        "val": 0,
+                        "name": "off",
+                        "desc": "Off"
+                    },
+                    "heaterOptions": {
+                        "total": 2,
+                        "gas": 1,
+                        "solar": 1,
+                        "heatpump": 0,
+                        "ultratemp": 0,
+                        "hybrid": 0
+                    },
+                    "setPoint": 99
+                }
+            ],
+            "air": 64,
+            "solar": 99,
+            "equipmentType": "temps"
+        }
+
+
+          
+  responses:
+    EquipmentNotFoundError:
+      description: "204: The specified equipment cannot be found."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InvalidEquipmentIdError:
+      description: "250: The specified equipment Id cannot be found."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InvalidEquipmentDataError:
+      description: "270: The data provided is invalid."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    ServiceParameterError:
+      description: "280: The data service is invalid."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InvalidOperationError:
+      description: "100: The data service is invalid."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    ParameterOutOfRangeError:
+      description: "100: The data service is invalid."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    MessageError:
+      description: "500: General error sending messages."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    OutboundMessageError:
+      description: "501: Error sending outbound message."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InboundMessageError:
+      description: "502: Error receiving inbound message."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
