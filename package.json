@@ -6,7 +6,7 @@
   "scripts": {
     "test": "swagger-cli validate _build/openapi3.yaml",
     "build": "swagger-cli bundle nodejs-poolcontroller-api.yaml --outfile _build/nodejs-poolcontroller-api.yaml --type yaml",
-    "postman": "openapi2postmanv2 -s nodejs-poolcontroller-api.yaml -o _build/postman.json -p"
+    "postman": "openapi2postmanv2 -s nodejs-poolcontroller-api.yaml -o nodejs-poolcontroller-api.json -p"
   },
   "repository": {
     "type": "git",

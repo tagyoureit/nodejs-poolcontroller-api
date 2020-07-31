@@ -5,14 +5,19 @@ info:
     API's to access, manage and control your pool equipment.  You can find the main project at [nodejs-poolController](https://github.com/tagyoureit/nodejs-poolController/).
     The data structures are defined in the main app's [wiki](https://github.com/tagyoureit/nodejs-poolController/wiki/Version-6-Data-Structures).
 
-    These api's are `live` in the sense that you can execute any of them against your local nodejs-poolController app.  However, if you are viewing this API documentation via a github.io page you likely won't be able to access your local install.
+    These api's are `live` in the sense that you can execute any of them against your local nodejs-poolController app.  
+    1. Select one of the default servers or enter your server:port into the Server Variables area
+    1. Open up any endpoint
+    1. Click on "Try it out"
+    1. If there are Parameters or JSON variables that need to be included in the request, fill them out
+    1. Click execute and you can see the live results from your server "To set body settings, send an object with the values you want to change from /config/options/bodies."
 
-    To execute these locally, you can do one of the following: 
+    You can also download a [Postman collection](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.json) you can download and import into your local app.
 
   version: 6.0.0
 
 servers:
-  - url: "{protocol}://{server:port}/"
+  - url: "{protocol}://{server}:{port}/"
     description: Type in your server address
     variables:
       protocol:
@@ -20,8 +25,10 @@ servers:
           - http
           - https
         default: http
-      server:port:
-        default: "server:4200"
+      server:
+        default: "server"
+      port:
+        default: "4200"
   - url: "{protocol}://localhost:4200"
     description: Local Server
     variables:
