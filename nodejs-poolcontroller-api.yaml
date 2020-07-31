@@ -12,8 +12,10 @@ info:
     1. If there are Parameters or JSON variables that need to be included in the request, fill them out
     1. Click execute and you can see the live results from your server "To set body settings, send an object with the values you want to change from /config/options/bodies."
 
-    * Note: You may not be able to access servers other than localhost when loading this from Github.io.  If that's the case, try one of the folloing:
+    * Note: If you are trying to access your njsPC app on any machine other than `localhost` you will need to connect to it over `https` due to [CORS](https://swagger.io/docs/open-source-tools/swagger-ui/usage/cors/) restrictions.
+    ** Note2: There is currently a bug with the `https` service in njsPC.  It will be fixed shortly.
 
+    There are options for running the API documentation locally on your computer:
     1. You can also download a [Postman collection](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.json) you can download and import into your local app.
     1. Download the [YAML](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.yaml) and paste it in http://editor.swagger.io
     1. Download a code editor like VSCode and use a [Swagger Preview Extension](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)

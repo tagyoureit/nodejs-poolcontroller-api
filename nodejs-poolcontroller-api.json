@@ -1,11 +1,11 @@
 {
     "item": [
         {
-            "id": "3f6d1aa0-f3a0-4832-84ef-9d98f5d307a1",
+            "id": "d452d48b-086a-4c64-bc81-6adb391daaa1",
             "name": "config",
             "item": [
                 {
-                    "id": "a46d2e08-b075-4211-88ef-32f39952356a",
+                    "id": "2b2e90f2-9d76-40fe-b274-65e8b5f743f2",
                     "name": "Shortcut for /config/all",
                     "request": {
                         "name": "Shortcut for /config/all",
@@ -62,7 +62,7 @@
                     },
                     "response": [
                         {
-                            "id": "fca26bff-efe6-427f-ac1e-1d2a89d77990",
+                            "id": "0293af6b-e7ce-4bae-8cf7-bd7dc455c83b",
                             "name": "poolConfig.json",
                             "originalRequest": {
                                 "url": {
@@ -98,11 +98,11 @@
                     "event": []
                 },
                 {
-                    "id": "790948a9-5da3-4c06-846d-b7802c29624b",
+                    "id": "f960b9b0-b365-40f0-9f2e-c03c6c7832e0",
                     "name": "circuits",
                     "item": [
                         {
-                            "id": "15d2380b-18ba-45d2-a065-a5f841af8024",
+                            "id": "8c55dbaa-c1c3-47db-9efb-bf453ab252b5",
                             "name": "Get an array of all circuit objects with config data",
                             "request": {
                                 "name": "Get an array of all circuit objects with config data",
@@ -160,7 +160,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "0c03062e-ba6f-4dff-ab56-a5e4f8f112ad",
+                                    "id": "bd99df10-0fbc-4810-b0e7-0eee3bfb7016",
                                     "name": "Circuit config array",
                                     "originalRequest": {
                                         "url": {
@@ -197,7 +197,7 @@
                             "event": []
                         },
                         {
-                            "id": "87ee29c4-022d-4221-9209-dab242656ed0",
+                            "id": "7681741d-9b63-46f6-adaf-6c826b9116da",
                             "name": "Get a list of valid controller names for circuits (*Touch only)\nThis endpoint will be going away.  Please use the equipmentNames object in\n/config/options/circuits or /config/options/features instead.",
                             "request": {
                                 "name": "Get a list of valid controller names for circuits (*Touch only)\nThis endpoint will be going away.  Please use the equipmentNames object in\n/config/options/circuits or /config/options/features instead.",
@@ -256,7 +256,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "1f0fc90c-922c-47d5-a188-e3e8dc1d6a3f",
+                                    "id": "2b637987-73a9-49c2-92ac-425906d36330",
                                     "name": "Array of controller function objects valid for names",
                                     "originalRequest": {
                                         "url": {
@@ -294,7 +294,7 @@
                             "event": []
                         },
                         {
-                            "id": "c0dd226e-e8a7-4bcd-8184-2f2a16786c65",
+                            "id": "e503be71-e55b-4506-98bf-4c716081913c",
                             "name": "Get a list of valid controller functions for circuits\nThis endpoint is going away.  Use the functions object in /config/options/circuits\nor /config/options/features instead.",
                             "request": {
                                 "name": "Get a list of valid controller functions for circuits\nThis endpoint is going away.  Use the functions object in /config/options/circuits\nor /config/options/features instead.",
@@ -353,7 +353,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "6745bbdd-a197-476c-90ad-25312465a291",
+                                    "id": "3f1c86ab-4f04-486e-bf76-241896b73be5",
                                     "name": "Array of controller function objects valid for circuits",
                                     "originalRequest": {
                                         "url": {
@@ -394,11 +394,11 @@
                     "event": []
                 },
                 {
-                    "id": "660ceab4-8383-43e9-8cba-359b3638053a",
+                    "id": "52c2cedb-96a3-4868-b640-0829fbdba42f",
                     "name": "body",
                     "item": [
                         {
-                            "id": "d2d72220-a429-4138-862e-dedda30cb1f8",
+                            "id": "22cfa6dc-ec89-43f5-b4f6-44ff684523ed",
                             "name": "Set options related to the \"Body\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"Body\" section in poolConfig.json",
@@ -466,7 +466,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "0d663f9e-2d61-4975-9045-7973bd1a6af6",
+                                    "id": "9c9782aa-a400-466a-85dc-2e968e5a3622",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -509,7 +509,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "5966418d-b20a-4ea1-a3bb-8d173ef15804",
+                                    "id": "92e32772-2c10-4310-8764-e9152308958e",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -555,7 +555,7 @@
                             "event": []
                         },
                         {
-                            "id": "929c6af1-5b33-4017-988a-0f53544469ea",
+                            "id": "e01b3a2f-aa90-4bba-ac63-b651cf570cfe",
                             "name": "Get heat modes for the body specified by the id",
                             "request": {
                                 "name": "Get heat modes for the body specified by the id",
@@ -624,7 +624,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "3cb1c2c8-769d-430f-9c54-75daba4cd4b5",
+                                    "id": "6623c9eb-4d80-422f-83f8-aa04adc4ee95",
                                     "name": "Array of heat mode objects",
                                     "originalRequest": {
                                         "url": {
@@ -666,11 +666,11 @@
                     "event": []
                 },
                 {
-                    "id": "3ee7dd0f-e04f-431e-90d2-177df3cf5dc2",
+                    "id": "17bcdd08-7232-4d0e-a9b3-c0a60c7254d4",
                     "name": "circuit",
                     "item": [
                         {
-                            "id": "8f1d68a1-84b7-463b-9d6a-8c504c2ab072",
+                            "id": "cb378cb6-930b-46b4-b468-b5fe7f6441da",
                             "name": "Set options related to the \"Circuit\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"Circuit\" section in poolConfig.json",
@@ -738,7 +738,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "3154adad-a323-4243-9aac-b071bf7ff7c5",
+                                    "id": "12627365-1627-4911-8371-4fdce9d61c2b",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -781,7 +781,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "74d8076a-29bc-4656-8c49-795bebe16781",
+                                    "id": "7ba9a15e-919e-45ce-b8f0-5e768bb7fede",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -827,7 +827,7 @@
                             "event": []
                         },
                         {
-                            "id": "a80ebf22-a86f-4b46-8772-c6d2cb4dc454",
+                            "id": "414f2aa7-8a21-4d61-9927-07680b7b8050",
                             "name": "Delete a circuit at the specified id",
                             "request": {
                                 "name": "Delete a circuit at the specified id",
@@ -885,7 +885,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "5891a8db-8531-453e-969c-49d8114569ad",
+                                    "id": "5c3ac3e7-0190-427b-9d27-46f5f09ce279",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -919,7 +919,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "323ffb18-a962-4ae6-a09b-4a269380a9dd",
+                                    "id": "9780275c-0b2c-4c41-b18c-a89b53a145bf",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -956,7 +956,7 @@
                             "event": []
                         },
                         {
-                            "id": "f5ff67c3-4085-449c-bae9-d48155ceeecf",
+                            "id": "53b0e046-696a-4c5e-8e02-ade4a7a5802f",
                             "name": "Get all available names (built-in and custom).  (*Touch only)\nThis endpoint will be going away.  Please use the equipmentNames object \nin /config/options/circuits or /config/options/features instead.",
                             "request": {
                                 "name": "Get all available names (built-in and custom).  (*Touch only)\nThis endpoint will be going away.  Please use the equipmentNames object \nin /config/options/circuits or /config/options/features instead.",
@@ -1015,7 +1015,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "382585e7-5f6e-406a-a1f2-a644ab01f7f1",
+                                    "id": "25e1fcb7-a092-4bab-a169-ceb650c91b21",
                                     "name": "Array of name objects",
                                     "originalRequest": {
                                         "url": {
@@ -1053,7 +1053,7 @@
                             "event": []
                         },
                         {
-                            "id": "8bf9b3ba-2eba-42ff-b52e-274777f7d90f",
+                            "id": "221eb346-f5ea-459c-b21b-5e1393564181",
                             "name": "Get an array of objects that can include circuits, features, groups, virtual circuits.",
                             "request": {
                                 "name": "Get an array of objects that can include circuits, features, groups, virtual circuits.",
@@ -1133,7 +1133,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "7157b1bb-a572-47eb-b493-f7e3d21f35bd",
+                                    "id": "b53b3696-0768-4503-ac99-0f8e98d017cc",
                                     "name": "Array of circuits/features/groups/virtual circuit objects.",
                                     "originalRequest": {
                                         "url": {
@@ -1191,11 +1191,11 @@
                     "event": []
                 },
                 {
-                    "id": "754107b9-e56b-4d2a-8b71-a7107cae6d26",
+                    "id": "a9f7aff7-e785-4e0f-b605-993297fdea2c",
                     "name": "options",
                     "item": [
                         {
-                            "id": "ea1a3a03-e212-4310-9d37-22bd4c1f98b8",
+                            "id": "d78b7a04-e874-459a-9d70-ad90b20b8587",
                             "name": "Get all available options needed to configure general options",
                             "request": {
                                 "name": "Get all available options needed to configure general options",
@@ -1254,7 +1254,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "6fa9cd02-6861-4064-89b9-cac0576dcc37",
+                                    "id": "edbdd5ed-194c-45b4-99cd-c4292ff35cf9",
                                     "name": "Object containing all available general options for the pool type",
                                     "originalRequest": {
                                         "url": {
@@ -1292,7 +1292,7 @@
                             "event": []
                         },
                         {
-                            "id": "ac95370b-48ab-49c8-bcc3-7dde4b27838c",
+                            "id": "0a1b0b24-5205-43cb-8373-5291e45b9555",
                             "name": "Get all available options to set circuits",
                             "request": {
                                 "name": "Get all available options to set circuits",
@@ -1351,7 +1351,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "a5e95a44-f619-4af9-ae63-3e5c3d57364e",
+                                    "id": "cc0e9859-e8ff-4c62-a600-f85e3f76dfcd",
                                     "name": "Object containing all available general options for the circuits",
                                     "originalRequest": {
                                         "url": {
@@ -1389,7 +1389,7 @@
                             "event": []
                         },
                         {
-                            "id": "9297d8c1-510a-4a09-8c44-e696c7ba52bc",
+                            "id": "a0437da8-854f-4ee0-81a3-e688ebac4362",
                             "name": "Get all options needed to set circuit groups",
                             "request": {
                                 "name": "Get all options needed to set circuit groups",
@@ -1448,7 +1448,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "28840e0b-2f2f-4fb8-90e6-1e861d1edd44",
+                                    "id": "c00be075-6786-4664-b730-0925d263e6ab",
                                     "name": "Object containing all available general options for the circuit groups",
                                     "originalRequest": {
                                         "url": {
@@ -1486,7 +1486,7 @@
                             "event": []
                         },
                         {
-                            "id": "6840e14a-e6cf-4d09-b379-bab51d75dc2a",
+                            "id": "6e6d44ec-7286-4e1e-9749-429b096b6408",
                             "name": "Get all available options to set lightGroups",
                             "request": {
                                 "name": "Get all available options to set lightGroups",
@@ -1545,7 +1545,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "4704eba6-68e9-4953-a8fa-1d3827c3f120",
+                                    "id": "e5841f9c-d09b-46b0-a623-8af7f2595c31",
                                     "name": "Object containing all available general options for the light groups",
                                     "originalRequest": {
                                         "url": {
@@ -1583,7 +1583,7 @@
                             "event": []
                         },
                         {
-                            "id": "d947f26c-ea16-420b-a0a3-a94da0f7b947",
+                            "id": "1e14d44e-0de8-4a7d-a180-c5c78a307ba1",
                             "name": "Get all available options to set features",
                             "request": {
                                 "name": "Get all available options to set features",
@@ -1642,7 +1642,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "7bb69236-a357-4fb7-a039-27f5a4f6d9d9",
+                                    "id": "1877fa46-21a7-483b-835c-d0262400d3f7",
                                     "name": "Object containing all available general options for the circuit groups",
                                     "originalRequest": {
                                         "url": {
@@ -1680,7 +1680,7 @@
                             "event": []
                         },
                         {
-                            "id": "370e8d14-0b45-4685-8b02-9982bfa0ed63",
+                            "id": "ee2862c5-4431-4ef3-a2f3-b9e5408029d3",
                             "name": "Get all available options to set bodies",
                             "request": {
                                 "name": "Get all available options to set bodies",
@@ -1739,7 +1739,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "6e219e97-6370-4baa-a710-07a862467457",
+                                    "id": "34be3251-c46d-47fb-8c27-2e256b82aa06",
                                     "name": "Object containing all available general options for the bodies",
                                     "originalRequest": {
                                         "url": {
@@ -1777,7 +1777,7 @@
                             "event": []
                         },
                         {
-                            "id": "d056d4a1-fc5d-4a27-90f7-cc6986de656b",
+                            "id": "1ea88fb3-6e12-48fa-af79-50962ed56f4e",
                             "name": "Get all available options to set valves",
                             "request": {
                                 "name": "Get all available options to set valves",
@@ -1836,7 +1836,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "1ddbc336-d785-4a4f-91e9-7123235b091f",
+                                    "id": "c07cd9ff-f508-44f2-8ae4-6eaaee972953",
                                     "name": "Object containing all available general options for the valves",
                                     "originalRequest": {
                                         "url": {
@@ -1874,7 +1874,7 @@
                             "event": []
                         },
                         {
-                            "id": "83b50852-7637-4b0a-9249-b71482d581b6",
+                            "id": "83f74430-c3d5-4d7b-9c16-b8a02c671ae1",
                             "name": "Get all available options to set pumps",
                             "request": {
                                 "name": "Get all available options to set pumps",
@@ -1933,7 +1933,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "d76a15db-3722-445f-90e8-ab0511cfb006",
+                                    "id": "899b2e22-0c34-4fc8-b0cf-4f375ffdcb93",
                                     "name": "Object containing all available general options for the pumps",
                                     "originalRequest": {
                                         "url": {
@@ -1971,7 +1971,7 @@
                             "event": []
                         },
                         {
-                            "id": "73bff87a-1f7a-494b-9830-c2f9244989e5",
+                            "id": "1be23c87-6747-4a91-b3ad-5089a850b1a4",
                             "name": "Get all available options to set schedules",
                             "request": {
                                 "name": "Get all available options to set schedules",
@@ -2030,7 +2030,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "93ec6b42-a2cb-4cdf-9a92-79eba43607b8",
+                                    "id": "9df5ad5e-c817-45d9-a6ca-0cc0e417cf36",
                                     "name": "Object containing all available general options for the schedules",
                                     "originalRequest": {
                                         "url": {
@@ -2068,7 +2068,7 @@
                             "event": []
                         },
                         {
-                            "id": "b9ed2013-b11e-48f8-9bca-1f877d52ff5f",
+                            "id": "6a3543d4-6be1-4332-a2e4-dfb009967fad",
                             "name": "Get all available options to set heaters",
                             "request": {
                                 "name": "Get all available options to set heaters",
@@ -2127,7 +2127,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "451e2b97-2f26-4de0-a42e-753553eccbf1",
+                                    "id": "f783633e-28c1-4a2c-a223-96fd413f34c0",
                                     "name": "Object containing all available general options for the heaters",
                                     "originalRequest": {
                                         "url": {
@@ -2165,7 +2165,7 @@
                             "event": []
                         },
                         {
-                            "id": "a8f92901-eaaf-4608-9daf-f5bf0a1483bf",
+                            "id": "db162b9d-ebd7-494b-b871-3dfdf241a816",
                             "name": "Get a list of custom names (*Touch only)",
                             "request": {
                                 "name": "Get a list of custom names (*Touch only)",
@@ -2224,7 +2224,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "a53a4b91-c388-4751-bd81-4cbb36bab0fb",
+                                    "id": "abe81189-8af2-41ed-8a9d-79b3896b022c",
                                     "name": "Object with maxCustomNames and customNames",
                                     "originalRequest": {
                                         "url": {
@@ -2262,7 +2262,7 @@
                             "event": []
                         },
                         {
-                            "id": "52c998ba-1aa0-4135-b991-a262cd47124b",
+                            "id": "6bb08611-f846-4985-a97f-f05b8219dff1",
                             "name": "Get all available options to set chem controllers",
                             "request": {
                                 "name": "Get all available options to set chem controllers",
@@ -2321,7 +2321,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "7f3be00c-638c-4d35-8504-ed4a68aa9ace",
+                                    "id": "c0a9e64a-9a4c-43af-a972-0708e433ce84",
                                     "name": "Object containing all available general options for the chlorinators",
                                     "originalRequest": {
                                         "url": {
@@ -2359,7 +2359,7 @@
                             "event": []
                         },
                         {
-                            "id": "597f97dc-3077-4f1d-a2bc-77c3d5dabbab",
+                            "id": "bfd3d93c-9b07-4201-80d5-b836fa954b13",
                             "name": "Get all available options to set chlorinators",
                             "request": {
                                 "name": "Get all available options to set chlorinators",
@@ -2418,7 +2418,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "ceb7525a-517d-4661-a502-d0a6c4669e31",
+                                    "id": "8b917ad9-4a2f-4977-aac1-60cb3546a9d7",
                                     "name": "Object containing all available general options for the chlorinators",
                                     "originalRequest": {
                                         "url": {
@@ -2456,7 +2456,7 @@
                             "event": []
                         },
                         {
-                            "id": "d860606d-5d42-4301-ba00-6878098d5e09",
+                            "id": "178c054b-a51e-4802-962b-ea8207958f53",
                             "name": "Get days of week that are valid for the current OCP.  This can also be retrieved as `scheduleDays` in the /config/options/schedules object.",
                             "request": {
                                 "name": "Get days of week that are valid for the current OCP.  This can also be retrieved as `scheduleDays` in the /config/options/schedules object.",
@@ -2515,7 +2515,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "08390ed7-3237-45e7-96c7-b90246983641",
+                                    "id": "6c37d56a-adc7-402d-ac48-417c60facc52",
                                     "name": "Array of days",
                                     "originalRequest": {
                                         "url": {
@@ -2556,7 +2556,7 @@
                     "event": []
                 },
                 {
-                    "id": "db8db2ba-d5e8-465a-a6d3-d2adb0be8fb3",
+                    "id": "fb42019e-1987-4a6b-a5f5-068b28a1e27f",
                     "name": "Set options related to the \"Pool\" section in poolConfig.json.",
                     "request": {
                         "name": "Set options related to the \"Pool\" section in poolConfig.json.",
@@ -2624,7 +2624,7 @@
                     },
                     "response": [
                         {
-                            "id": "6583001c-8d21-401a-8a1d-6c094203ec71",
+                            "id": "93c59264-72cb-4657-abec-dcf4e50d62d6",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -2667,7 +2667,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "b7af427e-f14b-4de8-89fd-a557274b8157",
+                            "id": "393f0b30-ba57-4eb1-986b-ff5c6031a2de",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -2713,7 +2713,7 @@
                     "event": []
                 },
                 {
-                    "id": "16aca1d1-1129-4b98-b833-f6e6f3e92fdb",
+                    "id": "bbaabb77-018f-4712-acb0-c0fdf881b016",
                     "name": "Set options related to the \"Valve\" section in poolConfig.json",
                     "request": {
                         "name": "Set options related to the \"Valve\" section in poolConfig.json",
@@ -2781,7 +2781,7 @@
                     },
                     "response": [
                         {
-                            "id": "c21ef6d3-3bfa-4f2d-8b13-eedaa65d8fe8",
+                            "id": "d4755120-d574-4b24-a452-4f616897bf5f",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -2824,7 +2824,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "a6344276-af6b-49db-a865-201d54486360",
+                            "id": "af6afaa8-5952-4e79-8b28-b877ab93acb4",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -2870,11 +2870,11 @@
                     "event": []
                 },
                 {
-                    "id": "7a38978c-2f12-431d-96b8-08821ff8c2a7",
+                    "id": "a7294374-4a0f-4197-93af-b0e2b79b095c",
                     "name": "feature",
                     "item": [
                         {
-                            "id": "5b68f91f-86d0-4a0b-bd1d-9458965e5849",
+                            "id": "7cc6dd22-aa65-4c05-9fe8-0c15d48ac27a",
                             "name": "Set options related to the \"Circuit\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"Circuit\" section in poolConfig.json",
@@ -2942,7 +2942,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "1f5f3fbf-2d38-444d-a224-d7dd271f8a53",
+                                    "id": "a041a1b2-f9f8-4c84-80fc-008a8d4551a9",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -2985,7 +2985,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "e45f678a-56bf-4e28-8972-2fc5007ca2f9",
+                                    "id": "4fc533cf-63f3-4db4-b302-40cd2b4c9fff",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -3031,7 +3031,7 @@
                             "event": []
                         },
                         {
-                            "id": "2452d0ae-1a9b-404e-9500-4e3d79c87a68",
+                            "id": "86a8b9a9-be43-42ee-aec2-86212484818b",
                             "name": "Delete a feature at the specified id",
                             "request": {
                                 "name": "Delete a feature at the specified id",
@@ -3089,7 +3089,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "b06e1780-8f75-4387-8340-6988c6143382",
+                                    "id": "2c30b1c1-6792-45dc-a61d-16ae93de2f5c",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -3123,7 +3123,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "51c07284-fe40-4c18-bcb2-ec046bd1fe89",
+                                    "id": "d19f14c0-d86e-4a82-9c06-dfee45565b5f",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -3163,11 +3163,11 @@
                     "event": []
                 },
                 {
-                    "id": "c3c46f2d-5a1c-430b-beea-d14624fe0aaf",
+                    "id": "29c5e4a3-766c-4982-ae83-5ac3818e93d6",
                     "name": "circuit Group",
                     "item": [
                         {
-                            "id": "41c96464-4123-40e6-9076-81b51785a0f7",
+                            "id": "41c05581-66ac-4d2d-97bc-3f0468f037c1",
                             "name": "Set options related to the \"Circuit Groups\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"Circuit Groups\" section in poolConfig.json",
@@ -3235,7 +3235,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "e1cfc1aa-c7f2-45b1-a58c-d16b68582ca2",
+                                    "id": "edae71e0-8da1-4180-b79f-640d7d984a45",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -3278,7 +3278,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "b86771f6-52ad-487e-b431-4671a97cc217",
+                                    "id": "f69e3a64-1e74-4b28-bb04-59eb5dbc5eaf",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -3324,7 +3324,7 @@
                             "event": []
                         },
                         {
-                            "id": "6e7af36b-a8be-420a-927b-280c7f0fd4dc",
+                            "id": "8d7cda44-c673-423c-94ee-df83d230f8dc",
                             "name": "Delete a circuit group at the specified id",
                             "request": {
                                 "name": "Delete a circuit group at the specified id",
@@ -3382,7 +3382,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "f65051b6-baf2-4be3-a222-713239366eb6",
+                                    "id": "ad5be570-5ae1-4882-858e-adf1c1e9d322",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -3416,7 +3416,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "a943055e-f77d-4570-92a9-87bf41147009",
+                                    "id": "e26f86a9-3f96-422c-8979-f0146de8be44",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -3453,7 +3453,7 @@
                             "event": []
                         },
                         {
-                            "id": "61436298-bb7c-41ab-8759-4a3771685801",
+                            "id": "c24c63e1-4875-42d5-806d-3555997db3c9",
                             "name": "Get a single circuit group at the specified id",
                             "request": {
                                 "name": "Get a single circuit group at the specified id",
@@ -3521,7 +3521,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "a7b58f3a-f5ad-4406-841a-aa02f8057772",
+                                    "id": "f95e0d1e-499f-43bb-88e8-35b6368d6721",
                                     "name": "Circuit group extended object",
                                     "originalRequest": {
                                         "url": {
@@ -3562,11 +3562,11 @@
                     "event": []
                 },
                 {
-                    "id": "3b1bb417-cabf-40d3-be96-d700dd3deb83",
+                    "id": "f719bdcb-4de6-4d02-811c-a7a2dc1cda4c",
                     "name": "light Group",
                     "item": [
                         {
-                            "id": "dcc30c5d-8a8f-4462-ae98-d7df22e98845",
+                            "id": "079adb4a-d3ec-4bda-9f24-6127db093f4a",
                             "name": "Set options related to the \"lightGroups\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"lightGroups\" section in poolConfig.json",
@@ -3634,7 +3634,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "c6de3e8b-e30f-4b07-83d0-90a15121cab9",
+                                    "id": "92b159a8-c7b2-48af-8587-597f9a63bbbe",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -3677,7 +3677,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "8188666d-c2ad-4e4b-8159-f91a47758f19",
+                                    "id": "b32cccdc-7986-493d-a6e5-52a315c4098f",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -3723,7 +3723,7 @@
                             "event": []
                         },
                         {
-                            "id": "4284ce49-4eeb-4f9b-845a-9432eb1ff9b1",
+                            "id": "339c4aaf-2552-4af5-b030-abb5fbb8c30c",
                             "name": "Delete a light group at the specified id",
                             "request": {
                                 "name": "Delete a light group at the specified id",
@@ -3781,7 +3781,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "6d194e68-5bb7-497e-a5e6-c03262c08ac0",
+                                    "id": "389bb155-2d79-4510-8f00-0b5e696565c8",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -3815,7 +3815,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "000ec28f-1831-4ea6-8295-f738a1283211",
+                                    "id": "af6c2b38-eee2-4b78-9f1b-20a999de7595",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -3852,11 +3852,11 @@
                             "event": []
                         },
                         {
-                            "id": "774fa868-8a3c-48ad-893a-d0d63ee6fbbd",
+                            "id": "5e99090f-6ad2-4d5f-a114-efdaf2a76459",
                             "name": "{id}",
                             "item": [
                                 {
-                                    "id": "9f3392b9-6ff4-4c9e-a91a-00e1db2dd9c9",
+                                    "id": "90884247-3954-481b-872d-53b08203c8ed",
                                     "name": "Get a single lightGroup at the specified id This endpoint is going away.  Use /config/lightGroups or /config/options/lightGroups instead.",
                                     "request": {
                                         "name": "Get a single lightGroup at the specified id This endpoint is going away.  Use /config/lightGroups or /config/options/lightGroups instead.",
@@ -3924,7 +3924,7 @@
                                     },
                                     "response": [
                                         {
-                                            "id": "20fb747b-3430-4528-896f-4446d18d86f0",
+                                            "id": "46a6efa0-1f70-4f0c-a0f5-1f1a5a1abe6c",
                                             "name": "Object with deep linking",
                                             "originalRequest": {
                                                 "url": {
@@ -3962,7 +3962,7 @@
                                     "event": []
                                 },
                                 {
-                                    "id": "33e39551-78b0-4d8b-810d-1a625f37b6a6",
+                                    "id": "ab077247-0c9c-45ed-9d4f-0be0db94b1ea",
                                     "name": "set lg attribs\nThis endpoint is going away.  Use /config/lightGroup instead.",
                                     "request": {
                                         "name": "set lg attribs\nThis endpoint is going away.  Use /config/lightGroup instead.",
@@ -4031,7 +4031,7 @@
                                     },
                                     "response": [
                                         {
-                                            "id": "8c793fb7-2353-4bec-8feb-9e04fd1231ee",
+                                            "id": "3c7adfcf-3e41-462d-a118-92c46405ce18",
                                             "name": "Array of",
                                             "originalRequest": {
                                                 "url": {
@@ -4073,7 +4073,7 @@
                             "event": []
                         },
                         {
-                            "id": "2e856208-bcf8-44c9-a24c-b024406ca6a6",
+                            "id": "5780432c-b3f9-43c1-ab53-3ea87abfa316",
                             "name": "Get lightgroup colors, theme, action\nThis endpoint is going away.  Use /config/lightGroups or /config/options/lightGroups instead.",
                             "request": {
                                 "name": "Get lightgroup colors, theme, action\nThis endpoint is going away.  Use /config/lightGroups or /config/options/lightGroups instead.",
@@ -4132,7 +4132,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "95985821-8fc1-492a-81b6-91d53ca344e7",
+                                    "id": "d7703d27-a775-4d6e-a6a7-f598a7b67a96",
                                     "name": "Object of items...",
                                     "originalRequest": {
                                         "url": {
@@ -4173,11 +4173,11 @@
                     "event": []
                 },
                 {
-                    "id": "7476175e-7574-41bb-9a27-840f39adb0db",
+                    "id": "a61d0c61-7975-43a3-a9c2-50110e80afe5",
                     "name": "pump",
                     "item": [
                         {
-                            "id": "d7c0f734-b140-48ae-8ddd-1b9a8b9e45c9",
+                            "id": "0756526a-dc43-4b2f-a41e-f03dcffb4342",
                             "name": "Set options related to the \"pumps\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"pumps\" section in poolConfig.json",
@@ -4245,7 +4245,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "cea42af3-1adc-47e4-a145-ba937a44cdf9",
+                                    "id": "2b5780e1-924e-40c5-acc4-93a0334d26df",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -4288,7 +4288,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "e759b8cb-0b1b-4537-8d8c-c8f28be6f7f0",
+                                    "id": "8d574125-7ecd-4c46-ae84-1f113645fa58",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -4334,7 +4334,7 @@
                             "event": []
                         },
                         {
-                            "id": "591fc358-2b47-4583-8a53-1d9ff1f5435f",
+                            "id": "302dbaed-3397-431f-ae61-41b265cf8e83",
                             "name": "Delete a pump at the specified id",
                             "request": {
                                 "name": "Delete a pump at the specified id",
@@ -4392,7 +4392,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "52cf4edf-caa2-4905-9dcf-bba334b24c94",
+                                    "id": "7a0a79c5-6880-43a8-9a34-3c3bb65bc753",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -4426,7 +4426,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "9e7f7bbb-657c-4100-bdb7-5a64bb72fa66",
+                                    "id": "94a2958d-fa48-4807-84af-4b113902c4f3",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -4463,7 +4463,7 @@
                             "event": []
                         },
                         {
-                            "id": "b1c6410e-b7bd-4f24-95e4-7cb543ca42ce",
+                            "id": "80c18a16-6432-439d-89ac-d4b746c9f30c",
                             "name": "Delete a pump at the specified Id",
                             "request": {
                                 "name": "Delete a pump at the specified Id",
@@ -4522,7 +4522,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "36ba9605-300b-4a81-aa6f-9aaf2f20fdb8",
+                                    "id": "95ccdf3c-e6fd-417d-86c4-2c1085f0752c",
                                     "name": "Array of",
                                     "originalRequest": {
                                         "url": {
@@ -4568,7 +4568,7 @@
                     "event": []
                 },
                 {
-                    "id": "fbbc376a-2c8f-4bd6-8ae6-b80c884fdda0",
+                    "id": "bd3c090f-2c32-4288-9fcc-cf9c3d03c0d2",
                     "name": "Set custom names on OCP (*Touch only)",
                     "request": {
                         "name": "Set custom names on OCP (*Touch only)",
@@ -4636,7 +4636,7 @@
                     },
                     "response": [
                         {
-                            "id": "2dddb34f-c1fc-4aa2-87c7-9f383d2a8691",
+                            "id": "b9097528-e340-431f-aee6-43a15aa2d711",
                             "name": "Object with custom name",
                             "originalRequest": {
                                 "url": {
@@ -4679,7 +4679,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "1a4c9056-4c0c-4acf-84ab-a2d55c0daa10",
+                            "id": "de67e425-bc04-4219-b5d3-fd22e6a5ea0e",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -4725,7 +4725,7 @@
                     "event": []
                 },
                 {
-                    "id": "3503dc7f-beca-433c-8796-4b1138388974",
+                    "id": "eac1637d-245c-44ae-a1e3-d88d9b112c9d",
                     "name": "Set a single custom names on OCP (*Touch only)",
                     "request": {
                         "name": "Set a single custom names on OCP (*Touch only)",
@@ -4793,7 +4793,7 @@
                     },
                     "response": [
                         {
-                            "id": "6c7d0a06-848d-4cf5-8d0d-526b56ea1b82",
+                            "id": "04f20db6-d18c-4378-a2ad-8a9267617a8b",
                             "name": "Object with custom name",
                             "originalRequest": {
                                 "url": {
@@ -4836,7 +4836,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "5de6a605-9784-467f-9d45-38f77788fd0a",
+                            "id": "402e2c11-2001-4b38-85c1-bd2f503587d8",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -4882,11 +4882,11 @@
                     "event": []
                 },
                 {
-                    "id": "bdbe09f8-2c25-4970-a0b1-2f4a26c01c3e",
+                    "id": "0de83216-2ae9-4ef9-ab87-8c3dac787d84",
                     "name": "schedule",
                     "item": [
                         {
-                            "id": "d9e7988b-c603-4594-a1f5-1dcc6664c2e5",
+                            "id": "7b8968a3-4a3d-4517-8f52-6f01962577f3",
                             "name": "Set options related to the \"schedules\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"schedules\" section in poolConfig.json",
@@ -4954,7 +4954,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "64f91531-9bad-4aec-9555-d6e65627db55",
+                                    "id": "9cf84fa5-1f8d-4c39-b12b-f79dc48f4e93",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -4997,7 +4997,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "d5d23046-5c48-4732-83b4-c1033cb3c5fb",
+                                    "id": "e8104a45-50f2-4a6a-b0d9-5884cf44838c",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -5043,7 +5043,7 @@
                             "event": []
                         },
                         {
-                            "id": "6eddd7e0-f9eb-482c-abac-45f769c65ed9",
+                            "id": "49bb6d86-e80f-48ea-8fba-61ef7bdd7e40",
                             "name": "Delete a schedule at the specified id",
                             "request": {
                                 "name": "Delete a schedule at the specified id",
@@ -5101,7 +5101,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "79b6349d-72f0-4a65-9f93-61bca8d53986",
+                                    "id": "fb3084f6-2e07-42a5-a7d8-bbb916f6a1d8",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -5135,7 +5135,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "6376e3d2-1f0c-45a5-8987-5a412808bb34",
+                                    "id": "119e85c9-8e7f-4723-9bfd-2550ddf16a05",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -5172,7 +5172,7 @@
                             "event": []
                         },
                         {
-                            "id": "2da8c55e-bd10-4c56-ac44-eca679c51e3c",
+                            "id": "bf8236b4-5e51-45ff-9171-725844518c26",
                             "name": "Get an individual schedule\nThis endpoint will be going away.  Please use /config/schedules or /config/options/schedules instead.",
                             "request": {
                                 "name": "Get an individual schedule\nThis endpoint will be going away.  Please use /config/schedules or /config/options/schedules instead.",
@@ -5240,7 +5240,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "bce32b70-06cc-440c-985a-5972ccda5f31",
+                                    "id": "e87bc8fc-c5d3-4cbd-921a-6de76f5b5a12",
                                     "name": "Circuit object",
                                     "originalRequest": {
                                         "url": {
@@ -5281,11 +5281,11 @@
                     "event": []
                 },
                 {
-                    "id": "8ff1ce27-751e-4531-93db-9dd7d0c9dc02",
+                    "id": "8b77b100-d38a-4a6c-8553-9bc72bf3c9bb",
                     "name": "chlorinator",
                     "item": [
                         {
-                            "id": "6d5e3159-be36-48ce-8559-595ad6fcf45a",
+                            "id": "406669c3-e71a-4541-adf8-818ef3bf7b25",
                             "name": "Set options related to the \"chlorinators\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"chlorinators\" section in poolConfig.json",
@@ -5353,7 +5353,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "031d2835-153e-4e54-853f-4be9246690c5",
+                                    "id": "6a96d284-65f0-4415-8351-484961feefb1",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -5396,7 +5396,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "5003f4e9-daad-4048-a1d5-0f0378efc36a",
+                                    "id": "3af8c0ea-a436-46e6-829a-910a7cc81dfc",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -5442,7 +5442,7 @@
                             "event": []
                         },
                         {
-                            "id": "ae2ee3d2-7fe6-468c-a64b-fa2f82e4b074",
+                            "id": "08733402-9b64-455e-93af-665b4e9b1ff8",
                             "name": "Get a single chlorinator object",
                             "request": {
                                 "name": "Get a single chlorinator object",
@@ -5501,7 +5501,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "1608996b-29c1-4a2a-9a07-325178ce0e95",
+                                    "id": "cd11e48f-bb9b-474e-9113-f235f32655d8",
                                     "name": "Chlorinator object",
                                     "originalRequest": {
                                         "url": {
@@ -5547,7 +5547,7 @@
                     "event": []
                 },
                 {
-                    "id": "dd0fe3a4-06cd-45a6-b072-bfb8d8091702",
+                    "id": "767fef33-f23f-4334-a180-204c440d6cce",
                     "name": "Get a list of valid controller functions for features\nThis endpoint is going away.  Use the functions object in /config/options/circuits\nor /config/options/features instead.",
                     "request": {
                         "name": "Get a list of valid controller functions for features\nThis endpoint is going away.  Use the functions object in /config/options/circuits\nor /config/options/features instead.",
@@ -5606,7 +5606,7 @@
                     },
                     "response": [
                         {
-                            "id": "3c5922e5-ad9f-4d70-82a1-e65cdb8d34be",
+                            "id": "c77aef64-a482-4fc3-bc2d-31f7278a3b03",
                             "name": "Array of controller function objects valid for features",
                             "originalRequest": {
                                 "url": {
@@ -5644,7 +5644,7 @@
                     "event": []
                 },
                 {
-                    "id": "baf3a4f2-ba07-4923-ae51-aea5f2cfd77f",
+                    "id": "5f9d064a-48d9-40ca-9213-66ae627d873b",
                     "name": "Start a search for standalone chlorinators",
                     "request": {
                         "name": "Start a search for standalone chlorinators",
@@ -5703,7 +5703,7 @@
                     },
                     "response": [
                         {
-                            "id": "b161a6ad-fc37-4db1-9312-9b67365bc8d4",
+                            "id": "88c3aa2a-9c8c-4eca-a393-7bf3f8ba3ab0",
                             "name": "Chlorinator object (isActive and isVirtual should be checked)",
                             "originalRequest": {
                                 "url": {
@@ -5741,7 +5741,7 @@
                     "event": []
                 },
                 {
-                    "id": "6feb6a3b-aaf9-4790-be8c-e0ff992aa557",
+                    "id": "dff4eb31-12e9-434f-b55c-02dedc0aa3b5",
                     "name": "Set date and time options",
                     "request": {
                         "name": "Set date and time options",
@@ -5809,7 +5809,7 @@
                     },
                     "response": [
                         {
-                            "id": "0ac3cd15-1582-473d-a26a-4f19dbf233a1",
+                            "id": "0f095d6b-3d97-4a0a-a108-b3e32459675a",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -5852,7 +5852,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "0415fde7-b7cf-4e04-b17f-da680ad25eaa",
+                            "id": "e8d2bc5f-7a19-4644-a079-95d415c2a88e",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -5898,7 +5898,7 @@
                     "event": []
                 },
                 {
-                    "id": "0214736f-2051-46cc-ad9e-8222ec72977a",
+                    "id": "a5735b3b-b8ba-4fb4-93e2-d75c5f478adb",
                     "name": "Get a list of light group themes \nThis endpoint is going away.  Use themes object in /config/options/lightGroups instead.",
                     "request": {
                         "name": "Get a list of light group themes \nThis endpoint is going away.  Use themes object in /config/options/lightGroups instead.",
@@ -5957,7 +5957,7 @@
                     },
                     "response": [
                         {
-                            "id": "0b3a3900-ad1d-4edb-9b18-d9d5e32a3d40",
+                            "id": "f34d3007-e964-4092-b700-a8f62f1192df",
                             "name": "Array of",
                             "originalRequest": {
                                 "url": {
@@ -5995,7 +5995,7 @@
                     "event": []
                 },
                 {
-                    "id": "d46def10-a665-4b77-aadd-048488ce0305",
+                    "id": "14ddc907-a69e-492b-bce6-1733a7ead578",
                     "name": "Get lightGroup themes - can be retrieved with /config/options/lightGroups; also it sends enumerated state info and not just identifiers.\nThis endpoint is going away.  Use themes object in /config/options/lightGroups instead.",
                     "request": {
                         "name": "Get lightGroup themes - can be retrieved with /config/options/lightGroups; also it sends enumerated state info and not just identifiers.\nThis endpoint is going away.  Use themes object in /config/options/lightGroups instead.",
@@ -6054,7 +6054,7 @@
                     },
                     "response": [
                         {
-                            "id": "b659fa17-3ea0-487e-a809-0756617a6b3d",
+                            "id": "30fec0a9-d879-4a19-8003-302ea0167bd1",
                             "name": "Array of",
                             "originalRequest": {
                                 "url": {
@@ -6092,11 +6092,11 @@
                     "event": []
                 },
                 {
-                    "id": "3db00ebd-4244-473a-95c9-1c5003ad1ba8",
+                    "id": "24835fc7-ef98-4788-9400-4b84cbfdf15a",
                     "name": "chem Controller",
                     "item": [
                         {
-                            "id": "5fc23cca-d7fb-423a-8d29-9eb51a8ca430",
+                            "id": "7b18a47f-2570-4947-a568-6d75a802f572",
                             "name": "Set options related to the \"chemControllers\" section in poolConfig.json",
                             "request": {
                                 "name": "Set options related to the \"chemControllers\" section in poolConfig.json",
@@ -6164,7 +6164,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "9a126d75-8ed0-45d7-99aa-02a7d532f5da",
+                                    "id": "15fea0a8-5b09-4fa0-867c-cfc8cde1c422",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -6207,7 +6207,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "42d96270-6bad-40a6-8a55-de33ae32ad27",
+                                    "id": "7e04478d-d24c-4bbd-8fbc-b43d189a10a7",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -6253,7 +6253,7 @@
                             "event": []
                         },
                         {
-                            "id": "127b9987-3ded-4915-be8d-da74a8c4a9df",
+                            "id": "2ac39c07-a08d-4263-9502-4d6fcb2d0280",
                             "name": "NOT IMPLEMENTED YET.  Begin a search on the server for any chem controllers",
                             "request": {
                                 "name": "NOT IMPLEMENTED YET.  Begin a search on the server for any chem controllers",
@@ -6312,7 +6312,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "54aaee08-d138-4e7e-9a2e-25adcb3f0467",
+                                    "id": "d6bed65a-2d10-4df3-a719-cdbec137e8e1",
                                     "name": "Searching for chem controllers.",
                                     "originalRequest": {
                                         "url": {
@@ -6353,7 +6353,7 @@
                     "event": []
                 },
                 {
-                    "id": "54742135-b0c6-4a58-8b5b-7466de6f3bf2",
+                    "id": "f8dedaba-2f3a-469f-88a4-bdf094b09377",
                     "name": "Return a section of poolConfig.json",
                     "request": {
                         "name": "Return a section of poolConfig.json",
@@ -6420,7 +6420,7 @@
                     },
                     "response": [
                         {
-                            "id": "b73aed41-1ee2-42f7-a3a2-df1a3887dc39",
+                            "id": "ac739d61-6061-45d6-9a33-551447edb448",
                             "name": "{Section} of poolConfig.json",
                             "originalRequest": {
                                 "url": {
@@ -6460,11 +6460,11 @@
             "event": []
         },
         {
-            "id": "b9144ab7-3333-49d0-a036-b8417e30e8ca",
+            "id": "7a56a6d1-d92d-4c75-b54d-f174295c1bc6",
             "name": "app",
             "item": [
                 {
-                    "id": "f95be756-2955-4f26-879a-d9006000898e",
+                    "id": "ae9821a7-179a-4f87-bb0a-7aba78c65d3e",
                     "name": "Get all available options to set logger",
                     "request": {
                         "name": "Get all available options to set logger",
@@ -6523,7 +6523,7 @@
                     },
                     "response": [
                         {
-                            "id": "06c85203-baea-44bf-98d0-95cd2b79d7aa",
+                            "id": "3c560ed6-c566-4bb5-bc93-2fcc1361cf93",
                             "name": "Object containing all available options for the logger",
                             "originalRequest": {
                                 "url": {
@@ -6561,11 +6561,11 @@
                     "event": []
                 },
                 {
-                    "id": "1439cb4e-7ab3-4ebf-a035-49ffb792ac52",
+                    "id": "4954d117-5486-4898-87c5-0b194c1d444b",
                     "name": "logger",
                     "item": [
                         {
-                            "id": "1b5580b6-b3a7-47ce-98d0-1d0ac49a3b60",
+                            "id": "3b10d77d-49ef-4a11-b50b-9646f4ce1954",
                             "name": "Set options related to the \"log\" section in config.json",
                             "request": {
                                 "name": "Set options related to the \"log\" section in config.json",
@@ -6634,7 +6634,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "16ecfb02-3bd8-44f7-9a5f-83c417502e16",
+                                    "id": "a5aab18f-e6ba-4d3e-858a-9fa60b93d4a7",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -6678,7 +6678,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "d7d72bea-9709-4ad2-847c-d1879235f8a3",
+                                    "id": "52772cfc-d657-474a-b0fd-a9dc5cb46358",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -6725,7 +6725,7 @@
                             "event": []
                         },
                         {
-                            "id": "e128e2cb-a8e8-4720-bf14-44ff0e49a85c",
+                            "id": "ff3ff742-f35d-44cf-8b07-c3578b88bae1",
                             "name": "Delete current logfile from disk",
                             "request": {
                                 "name": "Delete current logfile from disk",
@@ -6784,7 +6784,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "60a40468-0254-4290-8ba3-997d1d0c367e",
+                                    "id": "41ef3aeb-15c9-4722-8a5e-39608d13643c",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -6825,7 +6825,7 @@
                     "event": []
                 },
                 {
-                    "id": "d9e2f1a7-678d-4368-bee6-0dbacd008eb9",
+                    "id": "225f01ba-2dae-48aa-b239-4218ba053de9",
                     "name": "Get all broadcast packets identifiers",
                     "request": {
                         "name": "Get all broadcast packets identifiers",
@@ -6885,7 +6885,7 @@
                     },
                     "response": [
                         {
-                            "id": "b4a4ae77-d579-40a5-9e18-bf4e51072ceb",
+                            "id": "bd5554de-604a-4157-88fe-2482a42c6daf",
                             "name": "Array of broadcast actions",
                             "originalRequest": {
                                 "url": {
@@ -6924,11 +6924,11 @@
                     "event": []
                 },
                 {
-                    "id": "52c18011-1ea0-4fc3-84a8-10716839aa20",
+                    "id": "da6e8f72-4e23-4609-a740-8bcff57a30fa",
                     "name": "config",
                     "item": [
                         {
-                            "id": "7230364f-2955-40fb-acaf-adff3833df3d",
+                            "id": "3d032e54-37c4-4dd5-9b89-c9fafa7454bf",
                             "name": "Reload the app with files from disk",
                             "request": {
                                 "name": "Reload the app with files from disk",
@@ -6987,7 +6987,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "ad5a18e7-eb38-4b98-a6ad-3fec847c35eb",
+                                    "id": "30a79722-0284-4628-b606-1dfaad81448d",
                                     "name": "Successful Reload",
                                     "originalRequest": {
                                         "url": {
@@ -7025,7 +7025,7 @@
                             "event": []
                         },
                         {
-                            "id": "3589f2d0-9956-485c-a2f0-c0fbcb0f52c9",
+                            "id": "6813ce3c-6e18-4251-bf6c-00227119a991",
                             "name": "Starts a packet capture on the server WITHOUT a reset",
                             "request": {
                                 "name": "Starts a packet capture on the server WITHOUT a reset",
@@ -7084,7 +7084,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "030c7b63-81db-4240-b5b4-b262600ec5f9",
+                                    "id": "b58bf968-f510-409a-a40a-17b6d7bc23ea",
                                     "name": "OK",
                                     "originalRequest": {
                                         "url": {
@@ -7122,7 +7122,7 @@
                             "event": []
                         },
                         {
-                            "id": "d55675a7-abc2-433d-8375-d5df3f442360",
+                            "id": "fe06d828-8543-4914-af31-c798baa2a1eb",
                             "name": "Starts a packet capture on the server WITH a reset",
                             "request": {
                                 "name": "Starts a packet capture on the server WITH a reset",
@@ -7181,7 +7181,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "c59d8997-7b05-4cc8-a01e-ecf7be4c3b0c",
+                                    "id": "abe395b6-bed3-4643-8c79-535a7b252ffe",
                                     "name": "OK",
                                     "originalRequest": {
                                         "url": {
@@ -7219,7 +7219,7 @@
                             "event": []
                         },
                         {
-                            "id": "357cf069-23f1-468b-9b43-9d77b509bcd3",
+                            "id": "3272e68e-ef4c-459c-bc3d-ea132441efa6",
                             "name": "Stop an in-progress packet capture and download a zipped file",
                             "request": {
                                 "name": "Stop an in-progress packet capture and download a zipped file",
@@ -7278,7 +7278,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "7db20a95-7721-45c3-9401-afe2afc9a999",
+                                    "id": "9df4e6db-3a1a-4829-8885-a588fa2735c8",
                                     "name": "Zip file of packet capture",
                                     "originalRequest": {
                                         "url": {
@@ -7322,11 +7322,11 @@
             "event": []
         },
         {
-            "id": "4fb14f49-9b64-4103-9529-2a1b6149c83a",
+            "id": "e89eef7f-39c0-4a10-804d-403ad565ff29",
             "name": "state",
             "item": [
                 {
-                    "id": "65f94279-78bf-4c33-a24b-f292905062ea",
+                    "id": "f07d35b2-8004-4911-a6b1-403063d5c65f",
                     "name": "Return all sections for the current state of the pool",
                     "request": {
                         "name": "Return all sections for the current state of the pool",
@@ -7384,7 +7384,7 @@
                     },
                     "response": [
                         {
-                            "id": "14858ea9-f9a9-49a5-9ac8-166fbae7f182",
+                            "id": "c22b102d-599d-4836-af07-09c4ccdce5f3",
                             "name": "JSON Object",
                             "originalRequest": {
                                 "url": {
@@ -7421,7 +7421,7 @@
                     "event": []
                 },
                 {
-                    "id": "3d4262e5-8b55-4e7b-91c6-cb8dc3f16e1f",
+                    "id": "f3d0fff2-0a4a-417e-940d-e8dcd542411b",
                     "name": "Return a section of poolState.json",
                     "request": {
                         "name": "Return a section of poolState.json",
@@ -7488,7 +7488,7 @@
                     },
                     "response": [
                         {
-                            "id": "a83b0210-bae6-41c9-ba31-41eb6773d117",
+                            "id": "2a0ea39f-585c-4218-aa10-9e8e241b042f",
                             "name": "{Section} of poolConfig.json",
                             "originalRequest": {
                                 "url": {
@@ -7525,7 +7525,7 @@
                     "event": []
                 },
                 {
-                    "id": "3c55890b-0f15-4c96-b50f-14f99a2957a1",
+                    "id": "23f61052-f774-487c-b33e-c7d93a5cd099",
                     "name": "Return an individual chem controller object",
                     "request": {
                         "name": "Return an individual chem controller object",
@@ -7593,7 +7593,7 @@
                     },
                     "response": [
                         {
-                            "id": "450383f9-bc43-4f54-8b5f-25fec3527d2a",
+                            "id": "50cf0a71-4b81-4b64-8265-d34d2caae103",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -7631,7 +7631,7 @@
                     "event": []
                 },
                 {
-                    "id": "e73c5ce2-9ed0-416b-b60f-481ce70040bd",
+                    "id": "bc37e7f7-9065-4ef4-af4e-5759c55b9555",
                     "name": "Return an individual chem controller object",
                     "request": {
                         "name": "Return an individual chem controller object",
@@ -7689,7 +7689,7 @@
                     },
                     "response": [
                         {
-                            "id": "0177f344-21e4-45cf-9b62-0aac0e402006",
+                            "id": "2fab5373-2322-4029-a673-ed0a5edf96f9",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -7726,11 +7726,11 @@
                     "event": []
                 },
                 {
-                    "id": "82439a5b-a9e7-4641-bb71-25e029213ad4",
+                    "id": "cd6c09be-ea54-4b42-a271-471dd4aa4c1e",
                     "name": "chlorinator",
                     "item": [
                         {
-                            "id": "d1b1c13c-94bc-4f26-bb69-ab1affb58fb5",
+                            "id": "b47abf4a-3fb0-4e05-a5a1-636e092d1c01",
                             "name": "Set attributes for a given chlorinator",
                             "request": {
                                 "name": "Set attributes for a given chlorinator",
@@ -7798,7 +7798,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "32e24451-6998-46b7-bcbf-1dee715ce97f",
+                                    "id": "6f51a14e-6856-498d-9055-409949fc67ca",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -7841,7 +7841,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "439a74c5-2aca-4c25-91a4-dc5c69a88923",
+                                    "id": "38df097d-bf0b-4a77-aed3-1ff4e25a4b82",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -7887,7 +7887,7 @@
                             "event": []
                         },
                         {
-                            "id": "383c6f6b-10d2-4321-a804-d385d0fdff92",
+                            "id": "73722a33-1463-46e3-9df0-11daf871447c",
                             "name": "Return an individual chlorinator object",
                             "request": {
                                 "name": "Return an individual chlorinator object",
@@ -7955,7 +7955,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "872ef9de-c303-42a1-ad66-6e714e191251",
+                                    "id": "ff914779-55e5-4c42-9e27-7d70ed77554b",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -7993,7 +7993,7 @@
                             "event": []
                         },
                         {
-                            "id": "b5f36841-157d-4467-aa5a-cbcf4d9181b6",
+                            "id": "f2ffd712-406b-4ab8-bf2b-af23d3954e95",
                             "name": "Set attributes for a given chlorinator.  Duplicate of /state/chlorinator.",
                             "request": {
                                 "name": "Set attributes for a given chlorinator.  Duplicate of /state/chlorinator.",
@@ -8061,7 +8061,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "c5be15ae-d687-48ed-ba4b-4354193439c7",
+                                    "id": "c1ae1c73-7ebe-463d-bdfb-0f9965d849ff",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -8104,7 +8104,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "c7bfaa6b-aa61-4371-bead-0a202c481c47",
+                                    "id": "91f14a1d-915c-4085-a694-13307b5d839a",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -8150,7 +8150,7 @@
                             "event": []
                         },
                         {
-                            "id": "3b7bb200-71f0-4e52-a4ce-ce92b2b281cc",
+                            "id": "4e11de86-6d45-447b-a46f-1b9cbba173e0",
                             "name": "Set super chlorinate true for a chlorinator.",
                             "request": {
                                 "name": "Set super chlorinate true for a chlorinator.",
@@ -8218,7 +8218,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "8c7dd97a-935f-4203-8f26-5e23835eb6be",
+                                    "id": "9dd56c3f-07e0-411b-85c3-048e4aa937d3",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -8261,7 +8261,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "34063841-a679-4ceb-aa85-b8c33b6171a6",
+                                    "id": "d1f2fe61-742c-4e70-ae09-7b147d359e97",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -8307,7 +8307,7 @@
                             "event": []
                         },
                         {
-                            "id": "6e333ca1-4980-4241-b732-6ead6213a9b6",
+                            "id": "79e411dc-2a98-4552-b6d2-b7feb61816c3",
                             "name": "Set super chlorinate hours for a chlorinator.",
                             "request": {
                                 "name": "Set super chlorinate hours for a chlorinator.",
@@ -8375,7 +8375,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "3597c7eb-ce2d-4bf2-bdea-9a59c6561bdc",
+                                    "id": "e5d5f695-5dde-40bf-a413-16429483d680",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -8418,7 +8418,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "c0c01c9d-8cbe-464d-a5c7-73db1f58ea9b",
+                                    "id": "5dd664b1-f8f1-4424-aedb-af35006ee8d6",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -8464,7 +8464,7 @@
                             "event": []
                         },
                         {
-                            "id": "316c349d-8f4a-42de-adda-4ac9167d00a0",
+                            "id": "621a99eb-8689-4546-b995-10079818371e",
                             "name": "Set pool Setpoint for a given chlorinator. This can be set with /state/chlorinator.",
                             "request": {
                                 "name": "Set pool Setpoint for a given chlorinator. This can be set with /state/chlorinator.",
@@ -8532,7 +8532,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "71f27fdd-3d2a-436c-992e-eac7cccf6cda",
+                                    "id": "a1a04917-73fc-4201-9841-0198d7c0b061",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -8575,7 +8575,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "e6d491ae-5903-4b86-ae4a-52ce9111aaf7",
+                                    "id": "4bbb7017-4db3-4b9d-bb17-7435e30eced9",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -8621,7 +8621,7 @@
                             "event": []
                         },
                         {
-                            "id": "e6db472c-4235-4149-afcb-02df22e692f1",
+                            "id": "fe160cc5-a5af-498c-b6d1-b7fae88dd7b5",
                             "name": "Set spa Setpoint for a given chlorinator. This can be set with /state/chlorinator.",
                             "request": {
                                 "name": "Set spa Setpoint for a given chlorinator. This can be set with /state/chlorinator.",
@@ -8689,7 +8689,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "1d105b12-152c-4fb6-a411-1e0b50211b52",
+                                    "id": "2b9c3938-2c34-49b9-b193-e0e5cb981640",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -8732,7 +8732,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "cf7f11b8-ad56-421f-89de-25a9a0f7a0be",
+                                    "id": "197fa19e-9fdb-4522-b4d4-30812a4ca76a",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -8781,11 +8781,11 @@
                     "event": []
                 },
                 {
-                    "id": "539f4559-63ba-4345-a0bb-239a935c2e42",
+                    "id": "e2e2c718-0c59-41ad-ac36-2648294fb2d2",
                     "name": "circuit",
                     "item": [
                         {
-                            "id": "56b3f9dd-d4d5-408b-bc73-26a75541bca7",
+                            "id": "f90130c0-b7d1-49cc-9a48-c41ba545bef5",
                             "name": "Return an individual circuit object",
                             "request": {
                                 "name": "Return an individual circuit object",
@@ -8853,7 +8853,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "e8c74607-c7f2-485f-8c17-525fdcfde64d",
+                                    "id": "6ca0900e-b180-4e2e-853f-761ee93af69f",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -8891,7 +8891,7 @@
                             "event": []
                         },
                         {
-                            "id": "cbeb71d8-9718-4b3e-9253-28ba0e95ab7a",
+                            "id": "a1d4c2a1-953e-47f2-b59c-537445de9a43",
                             "name": "Set options for a circuit in poolState.json",
                             "request": {
                                 "name": "Set options for a circuit in poolState.json",
@@ -8960,7 +8960,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "8cd058fb-137a-4b0a-a16f-58109481668c",
+                                    "id": "7cf4beb0-40c9-409b-84dd-ef8130510125",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -9004,7 +9004,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "7343d965-d745-4f05-92c4-907c65d55658",
+                                    "id": "dacee3cb-aa33-4472-a591-a71da9425727",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -9051,7 +9051,7 @@
                             "event": []
                         },
                         {
-                            "id": "1af0bbf4-af4b-4e64-aa4c-b08a0e42db18",
+                            "id": "0ac7e15d-79f0-417b-8c42-134c4bac397d",
                             "name": "Set options for a circuit in poolState.json",
                             "request": {
                                 "name": "Set options for a circuit in poolState.json",
@@ -9120,7 +9120,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "f650aebf-f926-43f3-94cf-c0d1d51eddc6",
+                                    "id": "ed75ea05-2c62-4bad-aa8f-e97adfdd5728",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -9164,7 +9164,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "6816eba3-77e8-46ba-bc56-c9885a49fd9b",
+                                    "id": "73d365d2-02c3-4539-a7c0-111c9d671fb1",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -9211,7 +9211,7 @@
                             "event": []
                         },
                         {
-                            "id": "33c7d9df-8eec-4f3c-8909-f02159283d95",
+                            "id": "5400933c-491a-458d-874d-2b1b38d2b9f6",
                             "name": "Set options for a theme of a circuit in poolState.json",
                             "request": {
                                 "name": "Set options for a theme of a circuit in poolState.json",
@@ -9280,7 +9280,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "b1d2c7e5-9d28-4ba4-bed5-8977a7d8b009",
+                                    "id": "a4d8eddd-c1a0-496e-a075-05fca5fe3bb3",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -9324,7 +9324,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "e3cc4f4d-3967-4307-9b53-d9ceeaf5aba3",
+                                    "id": "46e69b55-b08c-404f-b078-3b86bbacb084",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -9371,7 +9371,7 @@
                             "event": []
                         },
                         {
-                            "id": "4e603eeb-1f64-4ba9-9750-c0d52dbff55c",
+                            "id": "aee18896-dba8-479c-826a-b5f0fa1438e3",
                             "name": "Set options for the dimmer levels of a circuit in poolState.json",
                             "request": {
                                 "name": "Set options for the dimmer levels of a circuit in poolState.json",
@@ -9440,7 +9440,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "55006f9f-d3ff-418f-b0fc-09e98b81f6d1",
+                                    "id": "a42346b0-fdf1-443f-bbe7-b1bf023ef29a",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -9484,7 +9484,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "a6e9baab-1e09-4c20-8ad4-df71ef6ecacc",
+                                    "id": "b61f1e92-e9bb-4c44-bb5b-33318c917664",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -9534,7 +9534,7 @@
                     "event": []
                 },
                 {
-                    "id": "71378172-a83f-4463-b98c-1f61ada624f2",
+                    "id": "215c2fcf-5a69-4519-a21d-85eaf32a5d3a",
                     "name": "Return an individual pump object",
                     "request": {
                         "name": "Return an individual pump object",
@@ -9602,7 +9602,7 @@
                     },
                     "response": [
                         {
-                            "id": "1402925d-bf7d-4e1b-a49c-df76450c65c1",
+                            "id": "5ab01903-8264-4c65-811b-24b7602965ff",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -9640,11 +9640,11 @@
                     "event": []
                 },
                 {
-                    "id": "cbb30bd6-634e-40d3-b6ce-5ba53694fa8e",
+                    "id": "5ee91c1b-1230-4a6f-b3c3-0f0d91829602",
                     "name": "feature",
                     "item": [
                         {
-                            "id": "15783176-74f7-407b-928c-71d58355c943",
+                            "id": "c6373681-a7bb-47a0-8115-15eca9ae1cbc",
                             "name": "Set options for a feature in poolState.json",
                             "request": {
                                 "name": "Set options for a feature in poolState.json",
@@ -9713,7 +9713,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "fa2acad8-c9aa-4120-b43e-e5422b536dc7",
+                                    "id": "cd31dded-1e3b-4478-903d-768a09fe7e9f",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -9757,7 +9757,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "fbc53798-b9dd-4da8-a0c8-5923f51a33b1",
+                                    "id": "74b58dd4-fdef-4f03-9e14-c6559d9022a0",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -9804,7 +9804,7 @@
                             "event": []
                         },
                         {
-                            "id": "02ab0269-12e8-478f-b7a4-6c0a5090ec40",
+                            "id": "d2eb555f-d109-4923-aeff-c822430b006d",
                             "name": "Set options for a feature in poolState.json",
                             "request": {
                                 "name": "Set options for a feature in poolState.json",
@@ -9873,7 +9873,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "13e5bb90-c5eb-45c4-8773-abeb3d845686",
+                                    "id": "71626da1-0a75-4f2f-aac4-69569ae460b9",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -9917,7 +9917,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "3e4b5a03-b999-4862-81b0-d0b0a4a76f42",
+                                    "id": "e83f8f25-2255-4163-a8d8-cbe23cb5e135",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -9967,7 +9967,7 @@
                     "event": []
                 },
                 {
-                    "id": "266984c6-028a-419c-a27f-d395eab32fed",
+                    "id": "53a21986-a767-4bc0-8cea-0dec26f57f3d",
                     "name": "Set options for a circuitgroup in poolState.json",
                     "request": {
                         "name": "Set options for a circuitgroup in poolState.json",
@@ -10036,7 +10036,7 @@
                     },
                     "response": [
                         {
-                            "id": "222147d2-0db7-475a-827a-7a7764fe5553",
+                            "id": "c4770901-5131-43cd-8b7e-3080fbaf2c41",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -10080,7 +10080,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "b9bf1667-2fd9-453f-932f-86960c6db8d7",
+                            "id": "146eaa2b-7281-449b-afa1-756a9340b772",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -10127,11 +10127,11 @@
                     "event": []
                 },
                 {
-                    "id": "de92b5e6-23f1-427c-a96d-bba80dd2e337",
+                    "id": "c442e07c-6f8d-4eb7-be6b-5f32504ffdd3",
                     "name": "light Group",
                     "item": [
                         {
-                            "id": "9b090793-b88d-4386-9f91-5922f1fc3dbf",
+                            "id": "7a003254-a1e6-4fe6-820a-e176d5d561d3",
                             "name": "Set options for a lightGroup in poolState.json",
                             "request": {
                                 "name": "Set options for a lightGroup in poolState.json",
@@ -10200,7 +10200,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "4eeafb56-fb68-44ee-b3f6-0d91387e064d",
+                                    "id": "bd07b22b-4df0-4ab5-af62-5ec91e2ed5e9",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -10244,7 +10244,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "2dec7ee2-8fd8-4d92-9f48-b6e12241d974",
+                                    "id": "c48bb9e7-79c3-46a3-a90e-677819ce4481",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -10291,7 +10291,7 @@
                             "event": []
                         },
                         {
-                            "id": "61c6c778-1ec6-4b08-8585-412c0961d390",
+                            "id": "bbb6a2ef-ac45-4a13-80c7-cb5074bf523d",
                             "name": "Set options for a lightGroup in poolState.json",
                             "request": {
                                 "name": "Set options for a lightGroup in poolState.json",
@@ -10360,7 +10360,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "939c62f0-49b8-40a2-ae92-352db0a0f4b5",
+                                    "id": "b4a80c3d-a86c-4f83-90ef-1940eab10f25",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -10404,7 +10404,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "00f081e5-8b4d-479a-a8da-a4d409c54ea8",
+                                    "id": "737ffae7-e0f0-4c9b-8155-68b59d5178d5",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -10451,11 +10451,11 @@
                             "event": []
                         },
                         {
-                            "id": "601ae533-255c-4664-994c-b233d9b3d73f",
+                            "id": "1c6fb7ea-8bc4-43e3-94be-437979808d7b",
                             "name": "{id}",
                             "item": [
                                 {
-                                    "id": "d9627d45-42bc-473e-b936-7d01e5afb3a8",
+                                    "id": "65e39cf8-05c1-411b-b743-f358eaa87e18",
                                     "name": "Set lightGroup at specified Id to colorSync mode",
                                     "request": {
                                         "name": "Set lightGroup at specified Id to colorSync mode",
@@ -10524,7 +10524,7 @@
                                     },
                                     "response": [
                                         {
-                                            "id": "fe170ba4-b865-4bed-93e9-a916f1bbb2bd",
+                                            "id": "2762d2fa-ab6c-48f4-98ac-3ad00ee3392d",
                                             "name": "Success.  Returned object will contain an `action` object with name/val/desc properties.  Any value other than 0 (\"ready\") means the njsPC is counting down a 20s timer for the lights to finish sequencing.  Once they are done, a second emit with 'lightGroup' will return the action to ready state.  ",
                                             "originalRequest": {
                                                 "url": {
@@ -10560,7 +10560,7 @@
                                             "_postman_previewlanguage": "json"
                                         },
                                         {
-                                            "id": "5968d4e0-a13a-490c-82e6-4b5b78e0345e",
+                                            "id": "6c80cdc0-ff7e-48d6-927d-0d876091087d",
                                             "name": "400 or 500 return codes (See Schema)",
                                             "originalRequest": {
                                                 "url": {
@@ -10599,7 +10599,7 @@
                                     "event": []
                                 },
                                 {
-                                    "id": "2f45c1b0-89c8-42e5-b12e-3dfd24462f5e",
+                                    "id": "0c33d781-215d-4e44-8dcd-0c7242416132",
                                     "name": "Set lightGroup at specified Id to color mode",
                                     "request": {
                                         "name": "Set lightGroup at specified Id to color mode",
@@ -10668,7 +10668,7 @@
                                     },
                                     "response": [
                                         {
-                                            "id": "45f6338b-2ce0-49b5-8b89-113522e3deaf",
+                                            "id": "cecebfe1-e2a5-4a1f-94aa-46c23df45923",
                                             "name": "Success.  Returned object will contain an `action` object with name/val/desc properties.  Any value other than 0 (\"ready\") means the njsPC is counting down a 20s timer for the lights to finish sequencing.  Once they are done, a second emit with 'lightGroup' will return the action to ready state.      ",
                                             "originalRequest": {
                                                 "url": {
@@ -10704,7 +10704,7 @@
                                             "_postman_previewlanguage": "json"
                                         },
                                         {
-                                            "id": "697118db-9274-4b5f-9cdd-347974cb02f0",
+                                            "id": "cf1eb31e-b48b-4b20-9c34-33e2c23a8e7e",
                                             "name": "400 or 500 return codes (See Schema)",
                                             "originalRequest": {
                                                 "url": {
@@ -10743,7 +10743,7 @@
                                     "event": []
                                 },
                                 {
-                                    "id": "be79eae6-c2f7-47b1-8d6e-33142db20218",
+                                    "id": "af7f5795-8981-4a98-bcb2-980de550d2e4",
                                     "name": "Set lightGroup at specified Id to colorSwim mode",
                                     "request": {
                                         "name": "Set lightGroup at specified Id to colorSwim mode",
@@ -10812,7 +10812,7 @@
                                     },
                                     "response": [
                                         {
-                                            "id": "fa791a4b-4855-4bb2-b768-4658c7ba7771",
+                                            "id": "4f15eec4-2d7e-4bc2-91a4-c5ed163aaeb5",
                                             "name": "Success.  Returned object will contain an `action` object with name/val/desc properties.  Any value other than 0 (\"ready\") means the njsPC is counting down a 20s timer for the lights to finish sequencing.  Once they are done, a second emit with 'lightGroup' will return the action to ready state.      ",
                                             "originalRequest": {
                                                 "url": {
@@ -10848,7 +10848,7 @@
                                             "_postman_previewlanguage": "json"
                                         },
                                         {
-                                            "id": "541cf7e3-9083-4252-af13-ce235851d517",
+                                            "id": "5c2d4120-cd41-4ccd-af9e-bbacf5ed908e",
                                             "name": "400 or 500 return codes (See Schema)",
                                             "originalRequest": {
                                                 "url": {
@@ -10893,7 +10893,7 @@
                     "event": []
                 },
                 {
-                    "id": "395c4847-afae-42ca-a787-e354d9989a0c",
+                    "id": "ed7c9d97-445f-450e-a551-8a8ca3213fdd",
                     "name": "Manually input temperatures.  This is only for virtual/standalone controllers.  Values will be overwritten by any OCP",
                     "request": {
                         "name": "Manually input temperatures.  This is only for virtual/standalone controllers.  Values will be overwritten by any OCP",
@@ -10961,7 +10961,7 @@
                     },
                     "response": [
                         {
-                            "id": "8796b6c5-2386-47d0-aad2-d81f6ce3bb28",
+                            "id": "74221556-b5f5-405d-a9a6-ed0e842c596b",
                             "name": "Success",
                             "originalRequest": {
                                 "url": {
@@ -11004,7 +11004,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "b15e9b3c-7023-4a5c-8394-ae9416e8e1e2",
+                            "id": "23034fcb-2c8a-4419-af5e-fb8e3f6f987f",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -11050,11 +11050,11 @@
                     "event": []
                 },
                 {
-                    "id": "9731ea88-bed8-45e1-97ba-9f1b9f415578",
+                    "id": "52b8d54e-ce9a-415c-b54e-360a7435c0ce",
                     "name": "body",
                     "item": [
                         {
-                            "id": "c86eaf1f-59fe-4ded-8457-ec1922f899ef",
+                            "id": "624260c7-39f7-469b-86f9-621d1d41fad7",
                             "name": "Set heat mode for a body in poolState.json",
                             "request": {
                                 "name": "Set heat mode for a body in poolState.json",
@@ -11123,7 +11123,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "5f130b22-318c-49fc-b9ba-0b6470d99ea5",
+                                    "id": "a710f9e5-4ab8-48b4-87f8-379fe4e8435d",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -11167,7 +11167,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "a84be903-24a0-468b-a16d-5ce38743cde6",
+                                    "id": "0d908d2a-af4a-49e0-8ff9-77c5ae8c6329",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -11214,7 +11214,7 @@
                             "event": []
                         },
                         {
-                            "id": "ff715474-b517-4aed-a09c-ecb6772aed84",
+                            "id": "7c8a4cde-322f-4a00-b594-265eb03a32e9",
                             "name": "Set temp for a body in poolState.json",
                             "request": {
                                 "name": "Set temp for a body in poolState.json",
@@ -11283,7 +11283,7 @@
                             },
                             "response": [
                                 {
-                                    "id": "965508a8-4d58-4e11-86e2-043c7bfac7f1",
+                                    "id": "b26a36dd-19db-4c82-9733-f9752049ba31",
                                     "name": "Success",
                                     "originalRequest": {
                                         "url": {
@@ -11327,7 +11327,7 @@
                                     "_postman_previewlanguage": "json"
                                 },
                                 {
-                                    "id": "c71d0d42-f0d5-4671-9b19-9b32b85af1ac",
+                                    "id": "05b08817-a019-4ae1-9547-89d265dca11a",
                                     "name": "400 or 500 return codes (See Schema)",
                                     "originalRequest": {
                                         "url": {
@@ -11377,7 +11377,7 @@
                     "event": []
                 },
                 {
-                    "id": "f374f573-1e86-45ae-8ccf-13ba070a5aeb",
+                    "id": "1f126ee5-dd73-4f50-a8ef-47992833ed26",
                     "name": "Cancel all delays on OCP",
                     "request": {
                         "name": "Cancel all delays on OCP",
@@ -11435,7 +11435,7 @@
                     },
                     "response": [
                         {
-                            "id": "3a8916ac-a9f1-404b-9389-9e03c5adefe9",
+                            "id": "e8a1ae63-a7d4-4873-bad4-9efceaf457b0",
                             "name": "OK",
                             "originalRequest": {
                                 "url": {
@@ -11469,7 +11469,7 @@
                             "_postman_previewlanguage": "text"
                         },
                         {
-                            "id": "73a7e771-473a-4086-8940-14828a1611ab",
+                            "id": "a9d53a94-025a-44ac-adca-91b6ed7ee44d",
                             "name": "400 or 500 return codes (See Schema)",
                             "originalRequest": {
                                 "url": {
@@ -11545,7 +11545,7 @@
         }
     ],
     "info": {
-        "_postman_id": "eb532ddc-255c-451f-85ac-69b82bff5952",
+        "_postman_id": "a7f62377-eb32-4e2a-bfeb-40f714f9c25f",
         "name": "nodejs-poolController API",
         "version": {
             "raw": "6.0.0",
@@ -11558,7 +11558,7 @@
         },
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "description": {
-            "content": "API's to access, manage and control your pool equipment.  You can find the main project at [nodejs-poolController](https://github.com/tagyoureit/nodejs-poolController/).\nThe data structures are defined in the main app's [wiki](https://github.com/tagyoureit/nodejs-poolController/wiki/Version-6-Data-Structures).\n\nThese api's are `live` in the sense that you can execute any of them against your local nodejs-poolController app(*).  \n1. Select one of the default servers or enter your server:port into the Server Variables area\n1. Open up any endpoint\n1. Click on \"Try it out\"\n1. If there are Parameters or JSON variables that need to be included in the request, fill them out\n1. Click execute and you can see the live results from your server \"To set body settings, send an object with the values you want to change from /config/options/bodies.\"\n\n* Note: You may not be able to access servers other than localhost when loading this from Github.io.  If that's the case, try one of the folloing:\n\n1. You can also download a [Postman collection](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.json) you can download and import into your local app.\n1. Download the [YAML](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.yaml) and paste it in http://editor.swagger.io\n1. Download a code editor like VSCode and use a [Swagger Preview Extension](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)",
+            "content": "API's to access, manage and control your pool equipment.  You can find the main project at [nodejs-poolController](https://github.com/tagyoureit/nodejs-poolController/).\nThe data structures are defined in the main app's [wiki](https://github.com/tagyoureit/nodejs-poolController/wiki/Version-6-Data-Structures).\n\nThese api's are `live` in the sense that you can execute any of them against your local nodejs-poolController app(*).  \n1. Select one of the default servers or enter your server:port into the Server Variables area\n1. Open up any endpoint\n1. Click on \"Try it out\"\n1. If there are Parameters or JSON variables that need to be included in the request, fill them out\n1. Click execute and you can see the live results from your server \"To set body settings, send an object with the values you want to change from /config/options/bodies.\"\n\n* Note: If you are trying to access your njsPC app on any machine other than `localhost` you will need to connect to it over `https` due to [CORS](https://swagger.io/docs/open-source-tools/swagger-ui/usage/cors/) restrictions.\n** Note2: There is currently a bug with the `https` service in njsPC.  It will be fixed shortly.\n\nThere are options for running the API documentation locally on your computer:\n1. You can also download a [Postman collection](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.json) you can download and import into your local app.\n1. Download the [YAML](https://github.com/tagyoureit/nodejs-poolcontroller-api/blob/master/nodejs-poolcontroller-api.yaml) and paste it in http://editor.swagger.io\n1. Download a code editor like VSCode and use a [Swagger Preview Extension](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)",
             "type": "text/plain"
         }
     }
