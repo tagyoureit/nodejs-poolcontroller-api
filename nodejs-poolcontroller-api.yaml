@@ -700,10 +700,12 @@ paths:
                     $ref: "#/components/schemas/valNameDescArr"
                   status:
                     $ref: "#/components/schemas/valNameDescArr"
-                  status1:
-                    $ref: "#/components/schemas/valNameDescArr"
-                  status2:
-                    $ref: "#/components/schemas/valNameDescArr"
+                  dosingStatus:
+                    $ref: "#/components/schemas/stateChemControllerDosingStatus"
+                  warnings:
+                    $ref: "#/components/schemas/stateChemControllerWarnings"
+                  alams:
+                    $ref: "#/components/schemas/stateChemControllerAlarms"
                   waterFlow:
                     $ref: "#/components/schemas/valNameDescArr"
                   controllers:
@@ -3383,13 +3385,15 @@ components:
       properties:
         id:
           type: integer
-        type:
+        address:
           type: integer
         isActive:
           type: boolean
         isVirtual:
           type: boolean
         name:
+          type: integer
+        type:
           type: integer
         phSetpoint:
           type: number
@@ -3401,19 +3405,33 @@ components:
           type: integer
         cyanuricAcid:
           type: integer
+        isFlowDelayMode: 
+          type: boolean 
+        phManualDosing:
+          type: boolean
+        isIntelliChlorUsed:
+          type: boolean
+        HMIAdvancedDisplay:
+          type: boolean
+        isAcidBaseDosing:
+          type: boolean
       example:
-        {
+          {
           "id": 1,
-          "type": 3,
-          "isActive": true,
-          "isVirtual": true,
-          "name": "Chem Controller",
-          "pHSetpoint": 7.4,
-          "orpSetpoint": 660,
-          "alkalinity": 40,
-          "calciumHardness": 710,
-          "cyanuricAcid": 10,
-        }
+          "address": 144,
+          "type": 2,
+          "name": "Chem Controller 1",
+          "pHSetpoint": 7.6,
+          "orpSetpoint": 680,
+          "calciumHardness": 250,
+          "cyanuricAcid": 18,
+          "alkalinity": 90,
+          "isFlowDelayMode": false,
+          "phManualDosing": false,
+          "isIntelliChlorUsed": false,
+          "HMIAdvancedDisplay": false,
+          "isAcidBaseDosing": false
+          }
     configHeaters:
       type: array
       items:
@@ -3830,34 +3848,68 @@ components:
           type: integer
         name:
           type: string
-        status:
+        type:
           $ref: "#/components/schemas/valNameDescObj"
-        saltLevel:
-          type: integer
-        status1:
-          $ref: "#/components/schemas/valNameDescObj"
-        status2:
-          $ref: "#/components/schemas/valNameDescObj"
-        temp:
-          type: integer
-        tempUnits:
-          $ref: "#/components/schemas/valNameDescObj"
+        lastComm:
+          type: number
+        address:
+          type: number
+        pHDosingTime:
+          type: number
+        orpDosingTime:
+          type: number
+        pHDosingVolume:
+          type: number
+        orpDosingVolume:
+          type: number
         acidTankLevel:
           enum: [0, 1, 2, 3, 4, 5, 6]
         orpTankLevel:
           enum: [0, 1, 2, 3, 4, 5, 6]
-        pHLevel:
-          type: number
-        orpLevel:
-          type: number
-        waterFlow:
-          $ref: "#/components/schemas/valNameDescObj"
-        phDosingTime:
-          type: number
-        orpDosingTime:
-          type: number
         saturationIndex:
           type: number
+        temp:
+          type: integer
+        tempUnits:
+          $ref: "#/components/schemas/valNameDescObj"
+        alarms:
+          type: object  
+          properties:
+            flow:
+              $ref: "#/components/schemas/valNameDescObj"
+            ph:
+              $ref: "#/components/schemas/valNameDescObj"
+            orp:
+              $ref: "#/components/schemas/valNameDescObj"
+            phTank:
+              $ref: "#/components/schemas/valNameDescObj"
+            orpTank:
+              $ref: "#/components/schemas/valNameDescObj"
+            probeFault:
+              $ref: "#/components/schemas/valNameDescObj"
+        phDosingStatus:
+          $ref: "#/components/schemas/valNameDescObj"
+        orpDosingStatus:
+          $ref: "#/components/schemas/valNameDescObj"
+        firmware:
+          type: string
+        warnings:
+          type: object  
+          properties:
+            waterChemistry:
+              $ref: "#/components/schemas/valNameDescObj"
+            phLockout:
+              $ref: "#/components/schemas/valNameDescObj"
+            phDailyLimitReached:
+              $ref: "#/components/schemas/valNameDescObj"
+            orpDailyLimitReached:
+              $ref: "#/components/schemas/valNameDescObj"
+            invalidSetup:
+              $ref: "#/components/schemas/valNameDescObj"
+            chlorinatorCommError:
+              $ref: "#/components/schemas/valNameDescObj"
+        saltLevel:
+          type: integer
         equipmentType:
           type: string
         alkalinity:
@@ -3872,6 +3924,8 @@ components:
           type: integer
         pHSetpoint:
           type: number
+        status:
+          $ref: "#/components/schemas/valNameDescObj"
     stateChlorinators:
       type: array
       items:
@@ -4236,30 +4290,116 @@ components:
     stateChemController:
       value:
         {
-          "id": 1,
-          "type": { "val": 3, "name": "homegrown", "desc": "Homegrown" },
-          "name": "Chem Controller",
-          "status": { "val": 1, "name": "nocomms", "desc": "No Communication" },
-          "saltLevel": 2900,
-          "status1": { "val": 101, "name": "monitoring", "desc": "Monitoring" },
-          "status2": { "val": 20, "name": "ok", "desc": "Ok" },
-          "temp": 86,
-          "tempUnits": { "val": 0, "name": "F", "desc": "Fahrenheit" },
-          "acidTankLevel": 6,
-          "orpTankLevel": 6,
-          "pHLevel": 7.166,
-          "orpLevel": 818.3,
-          "waterFlow": { "val": 0, "name": "ok", "desc": "Ok" },
-          "pHDosingTime": 217,
-          "orpDosingTime": 219,
-          "saturationIndex": -0.034,
-          "equipmentType": "chemController",
-          "alkalinity": 40,
-          "body": { "name": "pool", "desc": "Pool" },
-          "calciumHardness": 710,
-          "cyanuricAcid": 10,
-          "orpSetpoint": 660,
-          "pHSetpoint": 7.4,
+        "id": 1,
+        "type": {
+        "val": 2,
+        "name": "intellichem",
+        "desc": "IntelliChem"
+        },
+        "lastComm": 1597701544115,
+        "address": 144,
+        "pHLevel": 7.44,
+        "orpLevel": 787,
+        "pHDosingTime": 13,
+        "orpDosingTime": 0,
+        "pHDosingVolume": 28,
+        "orpDosingVolume": 0,
+        "acidTankLevel": 2,
+        "orpTankLevel": 0,
+        "saturationIndex": -0.18,
+        "tempUnits": {
+        "val": 0,
+        "name": "F",
+        "desc": "Fahrenheit"
+        },
+        "temp": 79,
+        "alarms": {
+        "flow": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No alarm"
+        },
+        "ph": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No alarm"
+        },
+        "orp": {
+        "val": 8,
+        "name": "orphigh",
+        "desc": "Alarm - orp High"
+        },
+        "phTank": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No alarm"
+        },
+        "orpTank": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No alarm"
+        },
+        "probeFault": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No alarm"
+        }
+        },
+        "phDosingStatus": {
+        "val": 2,
+        "name": "mixing",
+        "desc": "Dosing - Mixing"
+        },
+        "orpDosingStatus": {
+        "val": 2,
+        "name": "mixing",
+        "desc": "Dosing - Mixing"
+        },
+        "firmware": "1.060",
+        "warnings": {
+        "waterChemistry": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No Warning"
+        },
+        "phLockout": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No limits reached"
+        },
+        "phDailyLimitReached": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No limits reached"
+        },
+        "orpDailyLimitReached": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No limits reached"
+        },
+        "invalidSetup": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No limits reached"
+        },
+        "chlorinatorCommError": {
+        "val": 0,
+        "name": "ok",
+        "desc": "Ok - No limits reached"
+        }
+        },
+        "saltLevel": 3450,
+        "equipmentType": "chemController",
+        "alkalinity": 90,
+        "body": {
+        "val": 0,
+        "name": "pool",
+        "desc": "Pool"
+        },
+        "calciumHardness": 250,
+        "cyanuricAcid": 18,
+        "orpSetpoint": 680,
+        "pHSetpoint": 7.6
         }
     stateChlorinator:
       value:
@@ -4693,7 +4833,74 @@ components:
             "solar": 99,
             "equipmentType": "temps"
         }
-
+    stateChemControllerAlams:
+      value:
+        {
+          "flow": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No alarm"
+          },
+          "ph": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No alarm"
+          },
+          "orp": {
+          "val": 8,
+          "name": "orphigh",
+          "desc": "Alarm - orp High"
+          },
+          "phTank": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No alarm"
+          },
+          "orpTank": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No alarm"
+          },
+          "probeFault": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No alarm"
+          }
+          }
+    stateChemControllerWarnings:
+      value:
+        {
+          "waterChemistry": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No Warning"
+          },
+          "phLockout": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No limits reached"
+          },
+          "phDailyLimitReached": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No limits reached"
+          },
+          "orpDailyLimitReached": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No limits reached"
+          },
+          "invalidSetup": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No limits reached"
+          },
+          "chlorinatorCommError": {
+          "val": 0,
+          "name": "ok",
+          "desc": "Ok - No limits reached"
+          }
+        }
 
           
   responses:
