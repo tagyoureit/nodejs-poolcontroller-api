@@ -701,7 +701,7 @@ paths:
                   status:
                     $ref: "#/components/schemas/valNameDescArr"
                   dosingStatus:
-                    $ref: "#/components/schemas/stateChemControllerDosingStatus"
+                    $ref: "#/components/schemas/valNameDescArr"
                   warnings:
                     $ref: "#/components/schemas/stateChemControllerWarnings"
                   alams:
@@ -3871,41 +3871,15 @@ components:
         tempUnits:
           $ref: "#/components/schemas/valNameDescObj"
         alarms:
-          type: object  
-          properties:
-            flow:
-              $ref: "#/components/schemas/valNameDescObj"
-            ph:
-              $ref: "#/components/schemas/valNameDescObj"
-            orp:
-              $ref: "#/components/schemas/valNameDescObj"
-            phTank:
-              $ref: "#/components/schemas/valNameDescObj"
-            orpTank:
-              $ref: "#/components/schemas/valNameDescObj"
-            probeFault:
-              $ref: "#/components/schemas/valNameDescObj"
+          $ref: "#/components/schemas/stateChemControllerAlarms"
+        warnings:
+          $ref: "#/components/schemas/stateChemControllerWarnings"
         phDosingStatus:
           $ref: "#/components/schemas/valNameDescObj"
         orpDosingStatus:
           $ref: "#/components/schemas/valNameDescObj"
         firmware:
           type: string
-        warnings:
-          type: object  
-          properties:
-            waterChemistry:
-              $ref: "#/components/schemas/valNameDescObj"
-            phLockout:
-              $ref: "#/components/schemas/valNameDescObj"
-            phDailyLimitReached:
-              $ref: "#/components/schemas/valNameDescObj"
-            orpDailyLimitReached:
-              $ref: "#/components/schemas/valNameDescObj"
-            invalidSetup:
-              $ref: "#/components/schemas/valNameDescObj"
-            chlorinatorCommError:
-              $ref: "#/components/schemas/valNameDescObj"
         saltLevel:
           type: integer
         equipmentType:
@@ -3923,6 +3897,36 @@ components:
         pHSetpoint:
           type: number
         status:
+          $ref: "#/components/schemas/valNameDescObj"
+    stateChemControllerAlarms:
+      type: object  
+      properties:
+        flow:
+          $ref: "#/components/schemas/valNameDescObj"
+        ph:
+          $ref: "#/components/schemas/valNameDescObj"
+        orp:
+          $ref: "#/components/schemas/valNameDescObj"
+        phTank:
+          $ref: "#/components/schemas/valNameDescObj"
+        orpTank:
+          $ref: "#/components/schemas/valNameDescObj"
+        probeFault:
+          $ref: "#/components/schemas/valNameDescObj"
+    stateChemControllerWarnings:
+      type: object  
+      properties:
+        waterChemistry:
+          $ref: "#/components/schemas/valNameDescObj"
+        phLockout:
+          $ref: "#/components/schemas/valNameDescObj"
+        phDailyLimitReached:
+          $ref: "#/components/schemas/valNameDescObj"
+        orpDailyLimitReached:
+          $ref: "#/components/schemas/valNameDescObj"
+        invalidSetup:
+          $ref: "#/components/schemas/valNameDescObj"
+        chlorinatorCommError:
           $ref: "#/components/schemas/valNameDescObj"
     stateChlorinators:
       type: array
@@ -4831,7 +4835,7 @@ components:
             "solar": 99,
             "equipmentType": "temps"
         }
-    stateChemControllerAlams:
+    stateChemControllerAlarms:
       value:
         {
           "flow": {
