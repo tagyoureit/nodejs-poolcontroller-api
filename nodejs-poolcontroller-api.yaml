@@ -679,7 +679,7 @@ paths:
   /config/options/chemControllers/:
     get:
       summary: Get all available options to set chem controllers
-      description: "Returns: types, bodies, tempUnits, status, status1, status2, waterflow, controllers, maxChemControllers"
+      description: "Returns: types, bodies, tempUnits, status, alarms, warnings, controllers, maxChemControllers"
       tags:
         - config
         - options
@@ -706,8 +706,6 @@ paths:
                     $ref: "#/components/schemas/stateChemControllerWarnings"
                   alams:
                     $ref: "#/components/schemas/stateChemControllerAlarms"
-                  waterFlow:
-                    $ref: "#/components/schemas/valNameDescArr"
                   controllers:
                     $ref: "#/components/schemas/configChemControllers"
                   maxChemControllers:
